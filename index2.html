@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #7c3aed;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --dark: #1f2937;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: calc(100vh - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-header {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-header:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .welcome-screen {
+            padding: 30px 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .welcome-subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .process-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .process-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        .process-card.active {
+            border-color: var(--primary);
+            background: #f0f9ff;
+        }
+
+        .process-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .process-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .chat-area {
+            flex: 1;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: var(--primary);
+            color: white;
+        }
+
+        .message.ai .message-avatar {
+            background: var(--success);
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .message.user .message-content {
+            background: var(--primary);
+            color: white;
+        }
+
+        .message.ai .message-content {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--dark);
+        }
+
+        .input-section {
+            padding: 15px 20px;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .input-field {
+            flex: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            resize: none;
+            max-height: 100px;
+            min-height: 44px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .send-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background: var(--secondary);
+        }
+
+        .send-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: var(--dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .process-flow {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: var(--dark);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #64748b;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                height: 100vh;
+                border-radius: 0;
+                margin: 0;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> DR Assistant</h1>
+            <div class="header-actions">
+                <button class="btn-header" onclick="app.resetApp()">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="btn-header" onclick="app.showHelp()">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-title">Disaster Recovery Assistant</div>
+                <div class="welcome-subtitle">Select a process to begin</div>
+                
+                <div class="process-grid">
+                    <div class="process-card" data-process="feasibility">
+                        <div class="process-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <div class="process-title">DR Feasibility Assessment</div>
+                    </div>
+                    <div class="process-card" data-process="assistance">
+                        <div class="process-icon"><i class="fas fa-life-ring"></i></div>
+                        <div class="process-title">DR Assistance</div>
+                    </div>
+                    <div class="process-card" data-process="exception">
+                        <div class="process-icon"><i class="fas fa-list-alt"></i></div>
+                        <div class="process-title">Query Exception List</div>
+                    </div>
+                    <div class="process-card" data-process="esm">
+                        <div class="process-icon"><i class="fas fa-database"></i></div>
+                        <div class="process-title">Query ESM</div>
+                    </div>
+                    <div class="process-card" data-process="historical">
+                        <div class="process-icon"><i class="fas fa-history"></i></div>
+                        <div class="process-title">Historical DRs</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-area" id="chat-area">
+                <div class="messages" id="messages">
+                    <div class="typing-indicator" id="typing-indicator">
+                        <div class="message-avatar">AI</div>
+                        <div>
+                            Processing...
+                            <div class="typing-dots">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <div class="quick-actions" id="quick-actions"></div>
+                    <div class="input-group">
+                        <textarea 
+                            class="input-field" 
+                            id="user-input" 
+                            placeholder="Type your message..."
+                            rows="1"
+                        ></textarea>
+                        <button class="send-btn" id="send-btn" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class DRAssistant {
+            constructor() {
+                this.currentProcess = null;
+                this.currentStep = null;
+                this.processData = {};
+                this.messages = [];
+                
+                this.initializeElements();
+                this.bindEvents();
+            }
+
+            initializeElements() {
+                this.welcomeScreen = document.getElementById('welcome-screen');
+                this.chatArea = document.getElementById('chat-area');
+                this.messagesContainer = document.getElementById('messages');
+                this.userInput = document.getElementById('user-input');
+                this.sendBtn = document.getElementById('send-btn');
+                this.quickActions = document.getElementById('quick-actions');
+                this.typingIndicator = document.getElementById('typing-indicator');
+            }
+
+            bindEvents() {
+                // Process card clicks
+                document.querySelectorAll('.process-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const process = card.getAttribute('data-process');
+                        this.startProcess(process);
+                    });
+                });
+
+                // Send button and enter key
+                this.sendBtn.addEventListener('click', () => this.sendMessage());
+                this.userInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+
+                // Input validation
+                this.userInput.addEventListener('input', () => {
+                    this.sendBtn.disabled = !this.userInput.value.trim();
+                    this.autoResize();
+                });
+            }
+
+            autoResize() {
+                this.userInput.style.height = 'auto';
+                this.userInput.style.height = Math.min(this.userInput.scrollHeight, 100) + 'px';
+            }
+
+            startProcess(processType) {
+                this.currentProcess = processType;
+                this.currentStep = 'start';
+                this.processData = {};
+                
+                this.welcomeScreen.style.display = 'none';
+                this.chatArea.style.display = 'flex';
+                
+                this.clearMessages();
+                this.processFlow(processType, 'start');
+            }
+
+            async processFlow(process, step, userInput = null) {
+                this.showTyping();
+                
+                // Simulate processing delay
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                this.hideTyping();
+                
+                const flowMap = {
+                    feasibility: {
+                        start: () => {
+                            this.addMessage('I\'ll help you with DR Feasibility Assessment. Let me gather some information about your infrastructure.', 'ai');
+                            this.showProcessFlow(['Assessment Started', 'Gathering Input', 'Analysis', 'Report']);
+                            this.currentStep = 'input';
+                            this.setQuickActions(['Infrastructure Details', 'Recovery Requirements', 'Budget Constraints']);
+                            this.addMessage('Please provide details about your current infrastructure and recovery requirements:', 'ai');
+                        },
+                        input: (input) => {
+                            this.processData.infrastructure = input;
+                            this.addMessage('Thank you. Based on your input, I\'m analyzing the feasibility...', 'ai');
+                            this.currentStep = 'analysis';
+                            setTimeout(() => this.processFlow(process, 'analysis'), 1500);
+                        },
+                        analysis: () => {
+                            this.addMessage('Analysis complete! Here\'s your DR Feasibility Assessment:', 'ai');
+                            this.addMessage(`
+                                📊 **Assessment Results:**
+                                • Infrastructure: ${this.processData.infrastructure || 'Analyzed'}
+                                • Feasibility Score: 85%
+                                • Recommended RTO: 4 hours
+                                • Recommended RPO: 1 hour
+                                • Estimated Cost: $50K-75K
+                                
+                                Would you like detailed recommendations?
+                            `, 'ai');
+                            this.setQuickActions(['Detailed Report', 'Cost Breakdown', 'Implementation Plan', 'New Assessment']);
+                        }
+                    },
+                    
+                    assistance: {
+                        start: () => {
+                            this.addMessage('I can help you with DR Assistance. Please choose your need:', 'ai');
+                            this.setQuickActions(['SOP Procedures', 'Help Raise DR', 'General Assistance']);
+                            this.currentStep = 'choice';
+                        },
+                        choice: (input) => {
+                            if (input.toLowerCase().includes('sop')) {
+                                this.currentStep = 'sop';
+                                this.addMessage('Here are the Standard Operating Procedures for DR:', 'ai');
+                                this.addMessage(`
+                                    📋 **DR SOP:**
+                                    1. Incident Detection & Assessment
+                                    2. DR Team Activation
+                                    3. Communication Protocol
+                                    4. System Recovery Procedures
+                                    5. Data Restoration Process
+                                    6. Testing & Validation
+                                    7. Return to Normal Operations
+                                `, 'ai');
+                                this.setQuickActions(['Download SOP', 'Specific Procedure', 'Training Materials']);
+                            } else if (input.toLowerCase().includes('raise')) {
+                                this.currentStep = 'raise_dr';
+                                this.addMessage('I\'ll help you raise a DR. Please provide the incident details:', 'ai');
+                                this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach', 'Natural Disaster']);
+                            } else {
+                                this.addMessage('I\'m here to provide general DR assistance. What specific help do you need?', 'ai');
+                                this.setQuickActions(['Recovery Procedures', 'Contact Information', 'Escalation Process']);
+                            }
+                        },
+                        raise_dr: (input) => {
+                            this.processData.incident = input;
+                            this.addMessage(`DR ticket created for: ${input}`, 'ai');
+                            this.addMessage(`
+                                🎫 **DR Ticket #DR-${Date.now().toString().slice(-6)}**
+                                • Incident: ${input}
+                                • Priority: High
+                                • Status: Active
+                                • Assigned Team: DR Response Team
+                                • ETA: 30 minutes
+                            `, 'ai');
+                            this.setQuickActions(['Track Status', 'Update Incident', 'Contact Team']);
+                        }
+                    },
+                    
+                    exception: {
+                        start: () => {
+                            this.addMessage('Exception List Query - How can I help?', 'ai');
+                            this.setQuickActions(['General Query', 'Add Exception Data']);
+                            this.currentStep = 'choice';
+                        },
+                        choice: (input) => {
+                            if (input.toLowerCase().includes('general')) {
+                                this.currentStep = 'general_query';
+                                this.addMessage('Please specify your query about the exception list:', 'ai');
+                                this.setQuickActions(['View All Exceptions', 'Search by System', 'Recent Exceptions']);
+                            } else if (input.toLowerCase().includes('add')) {
+                                this.currentStep = 'add_choice';
+                                this.addMessage('To add exception data, I can help with:', 'ai');
+                                this.setQuickActions(['SOP for Adding Data', 'Direct Data Entry']);
+                            }
+                        },
+                        general_query: (input) => {
+                            this.addMessage(`Here are the exception list results for: ${input}`, 'ai');
+                            this.addMessage(`
+                                📋 **Exception List Results:**
+                                • Total Exceptions: 23
+                                • Active: 18
+                                • Resolved: 5
+                                • Critical: 3
+                                • Last Updated: ${new Date().toLocaleDateString()}
+                            `, 'ai');
+                        },
+                        add_choice: (input) => {
+                            if (input.toLowerCase().includes('sop')) {
+                                this.addMessage('Here\'s the SOP for adding exception data:', 'ai');
+                                this.addMessage(`
+                                    📋 **Exception Data SOP:**
+                                    1. Validate incident details
+                                    2. Check for duplicates
+                                    3. Categorize exception type
+                                    4. Assign priority level
+                                    5. Add to exception database
+                                    6. Notify relevant teams
+                                `, 'ai');
+                            } else {
+                                this.currentStep = 'data_entry';
+                                this.addMessage('Please provide the exception details to add:', 'ai');
+                                this.setQuickActions(['System Exception', 'Process Exception', 'Security Exception']);
+                            }
+                        }
+                    },
+                    
+                    esm: {
+                        start: () => {
+                            this.addMessage('ESM Query Assistant - What information do you need?', 'ai');
+                            this.setQuickActions(['Service Status', 'Incident History', 'Performance Metrics']);
+                            this.currentStep = 'input';
+                        },
+                        input: (input) => {
+                            this.addMessage(`Querying ESM for: ${input}`, 'ai');
+                            this.addMessage(`
+                                🔍 **ESM Query Results:**
+                                • Service Availability: 99.8%
+                                • Active Incidents: 2
+                                • Resolved Today: 15
+                                • Performance Score: 94%
+                                • Last Update: ${new Date().toLocaleTimeString()}
+                            `, 'ai');
+                            this.setQuickActions(['Detailed Report', 'Export Data', 'Set Alerts']);
+                        }
+                    },
+                    
+                    historical: {
+                        start: () => {
+                            this.addMessage('Historical DR Query - Please specify your search criteria:', 'ai');
+                            this.setQuickActions(['Last 30 Days', 'By System', 'By Severity', 'Custom Range']);
+                            this.currentStep = 'input';
+                        },
+                        input: (input) => {
+                            this.addMessage(`Searching historical DRs for: ${input}`, 'ai');
+                            this.addMessage(`
+                                📊 **Historical DR Results:**
+                                • Total DRs Found: 12
+                                • Successful Recoveries: 11 (92%)
+                                • Average Recovery Time: 2.5 hours
+                                • Most Common Cause: System Failure (40%)
+                                • Trend: Decreasing incidents
+                            `, 'ai');
+                            this.setQuickActions(['Detailed Analysis', 'Export Report', 'Trend Analysis']);
+                        }
+                    }
+                };
+
+                if (flowMap[process] && flowMap[process][step]) {
+                    if (typeof flowMap[process][step] === 'function') {
+                        flowMap[process][step](userInput);
+                    }
+                }
+            }
+
+            async sendMessage() {
+                const message = this.userInput.value.trim();
+                if (!message) return;
+
+                this.addMessage(message, 'user');
+                this.userInput.value = '';
+                this.sendBtn.disabled = true;
+                this.autoResize();
+
+                // Process the message based on current flow
+                if (this.currentProcess && this.currentStep) {
+                    await this.processFlow(this.currentProcess, this.currentStep, message);
+                }
+            }
+
+            addMessage(content, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = sender === 'user' ? 'U' : 'AI';
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.innerHTML = content.replace(/\n/g, '<br>');
+                
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(messageContent);
+                
+                this.messagesContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+
+            setQuickActions(actions) {
+                this.quickActions.innerHTML = '';
+                actions.forEach(action => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-btn';
+                    btn.textContent = action;
+                    btn.onclick = () => {
+                        this.userInput.value = action;
+                        this.sendBtn.disabled = false;
+                        this.sendMessage();
+                    };
+                    this.quickActions.appendChild(btn);
+                });
+            }
+
+            showProcessFlow(steps) {
+                const flowDiv = document.createElement('div');
+                flowDiv.className = 'process-flow';
+                
+                steps.forEach((step, index) => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'flow-step';
+                    stepDiv.innerHTML = `
+                        <div class="step-icon">${index + 1}</div>
+                        <div class="step-text">${step}</div>
+                    `;
+                    flowDiv.appendChild(stepDiv);
+                });
+                
+                this.messagesContainer.appendChild(flowDiv);
+                this.scrollToBottom();
+            }
+
+            showTyping() {
+                this.typingIndicator.style.display = 'flex';
+                this.scrollToBottom();
+            }
+
+            hideTyping() {
+                this.typingIndicator.style.display = 'none';
+            }
+
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+                }, 100);
+            }
+
+            clearMessages() {
+                this.messagesContainer.innerHTML = '<div class="typing-indicator" id="typing-indicator"><div class="message-avatar">AI</div><div>Processing...<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>';
+                this.typingIndicator = document.getElementById('typing-indicator');
+            }
+
+            resetApp() {
+                this.currentProcess = null;
+                this.currentStep = null;
+                this.processData = {};
+                this.chatArea.style.display = 'none';
+                this.welcomeScreen.style.display = 'flex';
+                this.userInput.value = '';
+                this.quickActions.innerHTML = '';
+            }
+
+            showHelp() {
+                alert(`DR Assistant Help:
+
+1. DR Feasibility Assessment - Analyze your DR readiness
+2. DR Assistance - Get help with procedures or raising DRs  
+3. Query Exception List - Search or add exception data
+4. Query ESM - Access Enterprise Service Management data
+5. Historical DRs - Review past disaster recovery incidents
+
+Click on any process to begin the guided workflow.`);
+            }
+        }
+
+        // Initialize the application
+        const app = new DRAssistant();
+    </script>
+</body>
+</html>
