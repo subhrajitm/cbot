@@ -329,6 +329,16 @@ body {
     line-height: 1.3;
     position: relative;
     z-index: 1;
+    margin-bottom: 4px;
+}
+
+.prompt-card .subtitle {
+    font-size: 0.7rem;
+    color: var(--gray-500);
+    line-height: 1.2;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
 }
 
 .chat-area {
