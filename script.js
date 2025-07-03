@@ -145,6 +145,12 @@ class ModernDRAssistant {
                     this.addMessage(`🎫 **Ticket Created: ${ticketId}**\n\nThe forms has been populated with the details you provided. Please review and submit the form.`, 'ai');
                     this.addMessageWithButton('View Ticket in CMS', '/cms/index.html');
                     this.setQuickActions(['Track Status', 'Update Details', 'Contact Team']);
+                    
+                    // Add follow-up message after 5 seconds
+                    setTimeout(() => {
+                        this.addMessage('Would you like to create another DR ticket?', 'ai');
+                        this.setQuickActions(['Yes, Create Another', 'No, I\'m Done', 'Track Current Ticket']);
+                    }, 5000);
                 }
             },
             
@@ -308,12 +314,6 @@ class ModernDRAssistant {
         
         this.messagesContainer.appendChild(messageDiv);
         this.scrollToBottom();
-        
-        // Add delayed message after 10 seconds
-        setTimeout(() => {
-            this.addMessage('Would you like to create another DR ticket?', 'ai');
-            this.setQuickActions(['Yes, Create New DR', 'No, I\'m Done']);
-        }, 5000);
     }
 
     setQuickActions(actions) {
