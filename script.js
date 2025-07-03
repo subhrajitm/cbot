@@ -133,7 +133,7 @@ class ModernDRAssistant {
                         this.setQuickActions(['Download SOP', 'Training', 'Contact Team']);
                     } else if (input.toLowerCase().includes('raise')) {
                         this.currentStep = 'raise_dr';
-                        this.addMessage('Creating DR ticket. What\'s the incident type?', 'ai');
+                        this.addMessage('Creating DR ticket. Please provide the below details \n 1. ESN \n 2. Part Name \n 3.Location \n 4.Damage', 'ai');
                         this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach']);
                     } else {
                         this.addMessage('I\'m here to help with DR processes. What do you need?', 'ai');
@@ -142,7 +142,8 @@ class ModernDRAssistant {
                 },
                 raise_dr: (input) => {
                     const ticketId = `DR-${Date.now().toString().slice(-6)}`;
-                    this.addMessage(`🎫 **Ticket Created: ${ticketId}**\n\n• Type: ${input}\n• Priority: High\n• Status: Active\n• ETA: 30 min`, 'ai');
+                    this.addMessage(`🎫 **Ticket Created: ${ticketId}**\n\nThe forms has been populated with the details you provided. Please review and submit the form.`, 'ai');
+                    this.addMessageWithButton('View Ticket in CMS', '/cms/index.html');
                     this.setQuickActions(['Track Status', 'Update Details', 'Contact Team']);
                 }
             },
@@ -265,6 +266,32 @@ class ModernDRAssistant {
         messageContent.className = 'message-content';
         messageContent.innerHTML = content.replace(/\n/g, '<br>');
         
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(messageContent);
+        
+        this.messagesContainer.appendChild(messageDiv);
+        this.scrollToBottom();
+    }
+
+    addMessageWithButton(buttonText, buttonUrl) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message ai';
+        
+        const avatar = document.createElement('div');
+        avatar.className = 'message-avatar';
+        avatar.textContent = 'AI';
+        
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        
+        const button = document.createElement('button');
+        button.className = 'cms-redirect-btn';
+        button.textContent = buttonText;
+        button.onclick = () => {
+            window.open(buttonUrl, '_blank');
+        };
+        
+        messageContent.appendChild(button);
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(messageContent);
         
