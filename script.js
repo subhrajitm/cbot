@@ -228,7 +228,18 @@ class ModernDRAssistant {
 
         const lowerMessage = message.toLowerCase();
         
-        if (lowerMessage.includes('feasibility') || lowerMessage.includes('assessment')) {
+        if (lowerMessage.includes('yes, create new dr') || lowerMessage.includes('create new dr')) {
+            this.currentProcess = 'assistance';
+            this.currentStep = 'start';
+            this.processFlow('assistance', 'start');
+        } else if (lowerMessage.includes('no, i\'m done') || lowerMessage.includes('i\'m done')) {
+            this.addMessage('Thank you for using the DR Assistant. Have a great day!', 'ai');
+            this.setQuickActions(['Start New Session', 'Home']);
+        } else if (lowerMessage.includes('start new session')) {
+            this.resetApp();
+        } else if (lowerMessage.includes('home')) {
+            this.resetApp();
+        } else if (lowerMessage.includes('feasibility') || lowerMessage.includes('assessment')) {
             this.currentProcess = 'feasibility';
             this.currentStep = 'start';
             this.processFlow('feasibility', 'start');
@@ -297,6 +308,12 @@ class ModernDRAssistant {
         
         this.messagesContainer.appendChild(messageDiv);
         this.scrollToBottom();
+        
+        // Add delayed message after 10 seconds
+        setTimeout(() => {
+            this.addMessage('Would you like to create another DR ticket?', 'ai');
+            this.setQuickActions(['Yes, Create New DR', 'No, I\'m Done']);
+        }, 5000);
     }
 
     setQuickActions(actions) {
