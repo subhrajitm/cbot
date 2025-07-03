@@ -256,7 +256,7 @@ body {
     max-width: 1200px;
     margin: 0 auto 24px;
     overflow-x: auto;
-    padding: 0 4px;
+    padding: 40px 4px;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
