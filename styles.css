@@ -266,6 +266,7 @@ body {
 }
 
 .prompt-card {
+    flex: 1;
     background: white;
     border: 1px solid var(--gray-200);
     border-radius: 16px;
