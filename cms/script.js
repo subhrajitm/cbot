@@ -33,10 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.closeModal = function() {
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
+        // Close the entire window
+        window.close();
     }
 
     function showModal() {
