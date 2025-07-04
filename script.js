@@ -305,7 +305,11 @@ class ModernDRAssistant {
         button.className = 'cms-redirect-btn';
         button.textContent = buttonText;
         button.onclick = () => {
-            window.open(buttonUrl, '_blank');
+            // Fix the path for local file system
+            const currentPath = window.location.pathname;
+            const basePath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+            const fullUrl = basePath + buttonUrl;
+            window.open(fullUrl, '_blank');
         };
         
         messageContent.appendChild(button);
