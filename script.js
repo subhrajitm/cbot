@@ -371,12 +371,12 @@ class ModernDRAssistant {
             
             esm: {
                 start: () => {
-                    this.addMessage('ESM Query - What information do you need?', 'ai');
+                    this.addMessage('Please provide the ESM# or Part Name and Engine Model', 'ai');
                     this.setQuickActions(['Service Status', 'Incidents', 'Performance']);
                     this.currentStep = 'input';
                 },
                 input: (input) => {
-                    this.addMessage(`🔍 **ESM Results:**\n\n• Availability: 99.8%\n• Active Issues: 2\n• Performance: 94%\n• Updated: ${new Date().toLocaleTimeString()}`, 'ai');
+                    this.addMessage(`🔍 **Quick Summary of the ESM:**\n\n This Procedure gives instructions to do a visual examination and servicability/repairability of the forward outer seal focusing on the following areas: \n <b>Inducer Holes, Inducer Pad, Impeller Vanes, Seal wire groove, Seal teeth, Rabbets, Bore Hub etc  </b>`, 'ai');
                     this.setQuickActions(['Detailed View', 'Export', 'Set Alerts']);
                 }
             },
@@ -388,7 +388,12 @@ class ModernDRAssistant {
                     this.currentStep = 'input';
                 },
                 input: (input) => {
-                    this.addMessage(`📊 **Historical Analysis:**\n\n• Total DRs: 12\n• Success Rate: 92%\n• Avg Recovery: 2.5h\n• Trend: Improving`, 'ai');
+                    this.addMessage(`📊 <b>Historical Analysis:</b><br><ul style="margin:0 0 0 1em;padding:0;">
+<li><b>Total DR:</b> 4,023 (Approved - 83%, Rejected - 17%)</li>
+<li><b>Priority Type:</b> Work Stoppage - 2,912 (72%), Routine - 1,120 (28%)</li>
+<li><b>Record Type:</b> SDR - 2,594 (65%), CDR - 1,438 (35%)</li>
+<li><b>Average Age of DR:</b> 7.8 Days (WS DR - 6 Days, Routine DR - 12.4 Days)</li>
+</ul>`, 'ai');
                     this.setQuickActions(['Detailed Report', 'Trends', 'Export']);
                 }
             }
