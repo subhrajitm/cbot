@@ -18,6 +18,25 @@ class ModernDRAssistant {
         this.charCounter = document.getElementById('char-counter');
         this.quickActions = document.getElementById('quick-actions');
         this.typingIndicator = document.getElementById('typing-indicator');
+        this.attachBtn = document.getElementById('attach-btn');
+        this.imageBtn = document.getElementById('image-btn');
+        
+        // Create hidden file input for attachments
+        this.fileInput = document.createElement('input');
+        this.fileInput.type = 'file';
+        this.fileInput.multiple = true;
+        this.fileInput.accept = '.pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xlsx,.xls,.csv';
+        this.fileInput.style.display = 'none';
+        document.body.appendChild(this.fileInput);
+        
+        // Create hidden image input
+        this.imageInput = document.createElement('input');
+        this.imageInput.type = 'file';
+        this.imageInput.accept = 'image/*';
+        this.imageInput.style.display = 'none';
+        document.body.appendChild(this.imageInput);
+        
+        this.attachments = [];
     }
 
     bindEvents() {
@@ -45,6 +64,14 @@ class ModernDRAssistant {
             this.autoResize();
         });
 
+        // Attachment buttons
+        this.attachBtn.addEventListener('click', () => this.fileInput.click());
+        this.imageBtn.addEventListener('click', () => this.imageInput.click());
+        
+        // File input change events
+        this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+        this.imageInput.addEventListener('change', (e) => this.handleImageSelect(e));
+
         // Navbar actions
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -66,8 +93,179 @@ class ModernDRAssistant {
 
     updateSendButton() {
         const hasText = this.chatInput.value.trim().length > 0;
+        const hasAttachments = this.attachments.length > 0;
         const withinLimit = this.chatInput.value.length <= 1000;
-        this.sendBtn.disabled = !hasText || !withinLimit;
+        this.sendBtn.disabled = (!hasText && !hasAttachments) || !withinLimit;
+    }
+
+    handleFileSelect(event) {
+        const files = Array.from(event.target.files);
+        files.forEach(file => {
+            if (this.validateFile(file)) {
+                this.addAttachment(file);
+            }
+        });
+        event.target.value = ''; // Reset input
+    }
+
+    handleImageSelect(event) {
+        const files = Array.from(event.target.files);
+        files.forEach(file => {
+            if (this.validateFile(file)) {
+                this.addAttachment(file);
+            }
+        });
+        event.target.value = ''; // Reset input
+    }
+
+    validateFile(file) {
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        const allowedTypes = [
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'text/plain',
+            'image/jpeg',
+            'image/jpg',
+            'image/png',
+            'image/gif',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'text/csv'
+        ];
+
+        if (file.size > maxSize) {
+            this.showError('File size must be less than 10MB');
+            return false;
+        }
+
+        if (!allowedTypes.includes(file.type)) {
+            this.showError('File type not supported');
+            return false;
+        }
+
+        return true;
+    }
+
+    addAttachment(file) {
+        const attachment = {
+            id: Date.now() + Math.random(),
+            file: file,
+            name: file.name,
+            size: this.formatFileSize(file.size),
+            type: file.type
+        };
+
+        this.attachments.push(attachment);
+        this.displayAttachments();
+        this.updateSendButton();
+    }
+
+    removeAttachment(id) {
+        this.attachments = this.attachments.filter(att => att.id !== id);
+        this.displayAttachments();
+        this.updateSendButton();
+    }
+
+    displayAttachments() {
+        // Remove existing attachment display
+        const existingDisplay = document.querySelector('.attachment-display');
+        if (existingDisplay) {
+            existingDisplay.remove();
+        }
+
+        if (this.attachments.length === 0) return;
+
+        // Create attachment display
+        const attachmentDisplay = document.createElement('div');
+        attachmentDisplay.className = 'attachment-display';
+        
+        this.attachments.forEach(attachment => {
+            const attachmentItem = document.createElement('div');
+            attachmentItem.className = 'attachment-item';
+            
+            const icon = this.getFileIcon(attachment.type);
+            const preview = this.createFilePreview(attachment);
+            
+            attachmentItem.innerHTML = `
+                <div class="attachment-preview">${preview}</div>
+                <div class="attachment-info">
+                    <div class="attachment-name">${attachment.name}</div>
+                    <div class="attachment-size">${attachment.size}</div>
+                </div>
+                <button class="remove-attachment" data-attachment-id="${attachment.id}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add event listener for remove button
+            const removeBtn = attachmentItem.querySelector('.remove-attachment');
+            removeBtn.addEventListener('click', () => this.removeAttachment(attachment.id));
+            
+            attachmentDisplay.appendChild(attachmentItem);
+        });
+
+        // Insert before input container
+        const inputContainer = document.querySelector('.input-container');
+        inputContainer.parentNode.insertBefore(attachmentDisplay, inputContainer);
+    }
+
+    createFilePreview(attachment) {
+        if (attachment.type.startsWith('image/')) {
+            return `<img src="${URL.createObjectURL(attachment.file)}" alt="${attachment.name}" class="file-preview-image">`;
+        } else {
+            const icon = this.getFileIcon(attachment.type);
+            return `<div class="file-preview-icon">${icon}</div>`;
+        }
+    }
+
+    getFileIcon(type) {
+        const iconMap = {
+            'application/pdf': '<i class="fas fa-file-pdf"></i>',
+            'application/msword': '<i class="fas fa-file-word"></i>',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '<i class="fas fa-file-word"></i>',
+            'text/plain': '<i class="fas fa-file-alt"></i>',
+            'image/jpeg': '<i class="fas fa-file-image"></i>',
+            'image/jpg': '<i class="fas fa-file-image"></i>',
+            'image/png': '<i class="fas fa-file-image"></i>',
+            'image/gif': '<i class="fas fa-file-image"></i>',
+            'application/vnd.ms-excel': '<i class="fas fa-file-excel"></i>',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '<i class="fas fa-file-excel"></i>',
+            'text/csv': '<i class="fas fa-file-csv"></i>'
+        };
+        return iconMap[type] || '<i class="fas fa-file"></i>';
+    }
+
+    formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    showError(message) {
+        // Create a temporary error message
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            z-index: 1000;
+            animation: slideInRight 0.3s ease;
+        `;
+        
+        document.body.appendChild(errorDiv);
+        
+        setTimeout(() => {
+            errorDiv.remove();
+        }, 3000);
     }
 
     handleNavAction(action, btn) {
@@ -203,7 +401,9 @@ class ModernDRAssistant {
 
     async sendMessage() {
         const message = this.chatInput.value.trim();
-        if (!message) return;
+        const hasAttachments = this.attachments.length > 0;
+        
+        if (!message && !hasAttachments) return;
 
         // If we're on the home screen, start a general conversation
         if (this.welcomeScreen.style.display !== 'none') {
@@ -212,8 +412,10 @@ class ModernDRAssistant {
             this.clearMessages();
         }
 
-        this.addMessage(message, 'user');
+        this.addMessage(message, 'user', this.attachments);
         this.chatInput.value = '';
+        this.attachments = [];
+        this.displayAttachments();
         this.sendBtn.disabled = true;
         this.updateCharCounter();
         this.autoResize();
@@ -271,7 +473,7 @@ class ModernDRAssistant {
         }
     }
 
-    addMessage(content, sender) {
+    addMessage(content, sender, attachments = []) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${sender}`;
         
@@ -281,7 +483,49 @@ class ModernDRAssistant {
         
         const messageContent = document.createElement('div');
         messageContent.className = 'message-content';
-        messageContent.innerHTML = content.replace(/\n/g, '<br>');
+        
+        // Add text content
+        if (content) {
+            const textDiv = document.createElement('div');
+            textDiv.innerHTML = content.replace(/\n/g, '<br>');
+            messageContent.appendChild(textDiv);
+        }
+        
+        // Add attachments if any
+        if (attachments && attachments.length > 0) {
+            const attachmentsDiv = document.createElement('div');
+            attachmentsDiv.className = 'message-attachments';
+            
+            attachments.forEach(attachment => {
+                const attachmentDiv = document.createElement('div');
+                attachmentDiv.className = 'message-attachment';
+                
+                if (attachment.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(attachment.file);
+                    img.alt = attachment.name;
+                    img.className = 'attachment-image';
+                    attachmentDiv.appendChild(img);
+                } else {
+                    const fileIcon = document.createElement('div');
+                    fileIcon.className = 'attachment-file-icon';
+                    fileIcon.innerHTML = this.getFileIcon(attachment.type);
+                    attachmentDiv.appendChild(fileIcon);
+                }
+                
+                const fileInfo = document.createElement('div');
+                fileInfo.className = 'attachment-file-info';
+                fileInfo.innerHTML = `
+                    <div class="attachment-file-name">${attachment.name}</div>
+                    <div class="attachment-file-size">${attachment.size}</div>
+                `;
+                attachmentDiv.appendChild(fileInfo);
+                
+                attachmentsDiv.appendChild(attachmentDiv);
+            });
+            
+            messageContent.appendChild(attachmentsDiv);
+        }
         
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(messageContent);
@@ -359,6 +603,8 @@ class ModernDRAssistant {
         this.currentProcess = null;
         this.currentStep = null;
         this.processData = {};
+        this.attachments = [];
+        this.displayAttachments();
         this.chatArea.style.display = 'none';
         this.welcomeScreen.style.display = 'flex';
         this.chatInput.value = '';
