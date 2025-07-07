@@ -414,6 +414,8 @@ body {
     border: 1px solid var(--gray-200);
     color: var(--gray-900);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-right: 40px;
 }
 
 .input-section {
@@ -954,15 +956,31 @@ body {
 }
 
 .speak-btn {
-    background: none;
+    background: var(--gray-100);
     border: none;
     color: var(--accent);
-    margin-left: 8px;
+    margin-left: auto;
+    margin-right: 4px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
     font-size: 1.1em;
     cursor: pointer;
-    vertical-align: middle;
-    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(6,182,212,0.08);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+}
+.message.ai .message-content {
+    position: relative;
 }
 .speak-btn:hover {
-    color: var(--primary);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(6,182,212,0.18);
 }
