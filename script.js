@@ -20,6 +20,7 @@ class ModernDRAssistant {
         this.typingIndicator = document.getElementById('typing-indicator');
         this.attachBtn = document.getElementById('attach-btn');
         this.imageBtn = document.getElementById('image-btn');
+        this.micBtn = document.getElementById('mic-btn');
         
         // Create hidden file input for attachments
         this.fileInput = document.createElement('input');
@@ -37,6 +38,17 @@ class ModernDRAssistant {
         document.body.appendChild(this.imageInput);
         
         this.attachments = [];
+
+        // Voice recognition setup
+        this.recognition = null;
+        this.isRecognizing = false;
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new SpeechRecognition();
+            this.recognition.lang = 'en-US';
+            this.recognition.continuous = false;
+            this.recognition.interimResults = false;
+        }
     }
 
     bindEvents() {
@@ -71,6 +83,35 @@ class ModernDRAssistant {
         // File input change events
         this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         this.imageInput.addEventListener('change', (e) => this.handleImageSelect(e));
+
+        // Mic button
+        if (this.micBtn && this.recognition) {
+            this.micBtn.addEventListener('click', () => this.toggleVoiceInput());
+            this.recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                this.chatInput.value = this.chatInput.value
+                    ? this.chatInput.value + ' ' + transcript
+                    : transcript;
+                this.updateCharCounter();
+                this.updateSendButton();
+                this.autoResize();
+            };
+            this.recognition.onstart = () => {
+                this.isRecognizing = true;
+                this.micBtn.classList.add('active');
+            };
+            this.recognition.onend = () => {
+                this.isRecognizing = false;
+                this.micBtn.classList.remove('active');
+            };
+            this.recognition.onerror = () => {
+                this.isRecognizing = false;
+                this.micBtn.classList.remove('active');
+            };
+        } else if (this.micBtn) {
+            this.micBtn.disabled = true;
+            this.micBtn.title = 'Voice input not supported in this browser';
+        }
 
         // Navbar actions
         document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -532,6 +573,16 @@ class ModernDRAssistant {
             messageContent.appendChild(attachmentsDiv);
         }
         
+        // Add speaker button for AI messages
+        if (sender === 'ai' && content) {
+            const speakBtn = document.createElement('button');
+            speakBtn.className = 'speak-btn';
+            speakBtn.title = 'Read aloud';
+            speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            speakBtn.onclick = () => this.speakText(this.stripHtml(content));
+            messageContent.appendChild(speakBtn);
+        }
+        
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(messageContent);
         
@@ -616,6 +667,31 @@ class ModernDRAssistant {
         this.quickActions.innerHTML = '';
         this.updateCharCounter();
         this.updateSendButton();
+    }
+
+    toggleVoiceInput() {
+        if (!this.recognition) return;
+        if (this.isRecognizing) {
+            this.recognition.stop();
+        } else {
+            this.recognition.start();
+        }
+    }
+
+    speakText(text) {
+        if (!('speechSynthesis' in window)) {
+            alert('Text-to-speech is not supported in this browser.');
+            return;
+        }
+        const utterance = new window.SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+    }
+
+    stripHtml(html) {
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        return div.textContent || div.innerText || '';
     }
 }
 

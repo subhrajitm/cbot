@@ -564,6 +564,27 @@ body {
     box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
 }
 
+.mic-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.8rem;
+    margin-right: 4px;
+    box-shadow: 0 2px 6px rgba(6, 182, 212, 0.2);
+}
+.mic-btn.active, .mic-btn:active {
+    background: var(--danger);
+    color: white;
+}
+
 .typing-indicator {
     display: none;
     align-items: center;
@@ -929,4 +950,18 @@ body {
         width: 50px;
         height: 50px;
     }
+}
+
+.speak-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    margin-left: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: color 0.2s;
+}
+.speak-btn:hover {
+    color: var(--primary);
 }
