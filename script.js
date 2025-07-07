@@ -429,12 +429,40 @@ class ModernDRAssistant {
                     this.currentStep = 'input';
                 },
                 input: (input) => {
-                    this.addMessage(`📊 <b>Historical Analysis:</b><br><ul style="margin:0 0 0 1em;padding:0;">
-<li><b>Total DR:</b> 4,023 (Approved - 83%, Rejected - 17%)</li>
-<li><b>Priority Type:</b> Work Stoppage - 2,912 (72%), Routine - 1,120 (28%)</li>
-<li><b>Record Type:</b> SDR - 2,594 (65%), CDR - 1,438 (35%)</li>
-<li><b>Average Age of DR:</b> 7.8 Days (WS DR - 6 Days, Routine DR - 12.4 Days)</li>
-</ul>`, 'ai');
+                    // Historical Analysis message
+                    // Create a container div for message-content
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message ai';
+                    const avatar = document.createElement('div');
+                    avatar.className = 'message-avatar';
+                    avatar.textContent = 'AI';
+                    const messageContent = document.createElement('div');
+                    messageContent.className = 'message-content';
+                    // Add the analysis text
+                    const textDiv = document.createElement('div');
+                    textDiv.innerHTML = `📊 <b>Historical Analysis:</b><br><ul style=\"margin:0 0 0 1em;padding:0;\">
+<li><b>Total DR:</b> 72</li>
+<li><b>Priority Type:</b> Work Stoppage - 20, Routine - 52</li>
+<li><b>Record Type:</b> SDR - 54, CDR - 18</li>
+<li><b>Monthly DRs (Jan–May):</b> Jan 7, Feb 15, Mar 18, Apr 17, May 15</li>
+</ul>`;
+                    messageContent.appendChild(textDiv);
+                    // Add the chart container
+                    const chartContainer = document.createElement('div');
+                    chartContainer.className = 'historical-charts';
+                    chartContainer.innerHTML = `
+                        <div style=\"display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;justify-content:center;\">
+                            <canvas id=\"priorityChart\" width=\"220\" height=\"180\"></canvas>
+                            <canvas id=\"recordChart\" width=\"220\" height=\"180\"></canvas>
+                            <canvas id=\"monthlyChart\" width=\"340\" height=\"180\"></canvas>
+                        </div>
+                    `;
+                    messageContent.appendChild(chartContainer);
+                    messageDiv.appendChild(avatar);
+                    messageDiv.appendChild(messageContent);
+                    this.messagesContainer.appendChild(messageDiv);
+                    this.scrollToBottom();
+                    setTimeout(() => this.renderHistoricalCharts(), 0);
                     this.setQuickActions(['Detailed Report', 'Trends', 'Export']);
                 }
             }
@@ -708,6 +736,83 @@ class ModernDRAssistant {
         const div = document.createElement('div');
         div.innerHTML = html;
         return div.textContent || div.innerText || '';
+    }
+
+    renderHistoricalCharts() {
+        // Priority Type Pie Chart
+        new Chart(document.getElementById('priorityChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Routine', 'Work Stoppage'],
+                datasets: [{
+                    label: 'Cases',
+                    data: [52, 20],
+                    backgroundColor: ['#6366f1', '#06b6d4']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: true, position: 'bottom' },
+                    title: { display: true, text: 'Priority Type (2025)', font: { size: 16 } },
+                    tooltip: { enabled: true, callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed}` } }
+                },
+                responsive: false
+            }
+        });
+        // Record Type Bar Chart
+        new Chart(document.getElementById('recordChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['SDR', 'CDR'],
+                datasets: [{
+                    label: 'Cases',
+                    data: [54, 18],
+                    backgroundColor: ['#8b5cf6', '#f59e0b']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Record Type (2025)', font: { size: 16 } },
+                    tooltip: { enabled: true, callbacks: { label: ctx => `Cases: ${ctx.parsed.y}` } }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Type' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'Cases' }, ticks: { stepSize: 5 } }
+                },
+                responsive: false
+            }
+        });
+        // Monthly DRs Line Chart
+        new Chart(document.getElementById('monthlyChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'DRs',
+                    data: [7, 15, 18, 17, 15],
+                    backgroundColor: 'rgba(16,185,129,0.15)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#10b981',
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Monthly DRs (2025)', font: { size: 16 } },
+                    tooltip: { enabled: true, callbacks: { label: ctx => `DRs: ${ctx.parsed.y}` } }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Month' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'DRs' }, ticks: { stepSize: 5 } }
+                },
+                responsive: false
+            }
+        });
     }
 }
 

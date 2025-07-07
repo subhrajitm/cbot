@@ -418,6 +418,37 @@ body {
     padding-right: 40px;
 }
 
+.historical-charts {
+    margin-top: 18px;
+    background: var(--gray-50);
+    border-radius: 12px;
+    padding: 18px 10px 10px 10px;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.06);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-end;
+}
+.historical-charts canvas {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+    margin-bottom: 0;
+}
+@media (max-width: 900px) {
+    .historical-charts {
+        flex-direction: column;
+        gap: 16px;
+        padding: 12px 2px 2px 2px;
+    }
+    .historical-charts canvas {
+        width: 100% !important;
+        max-width: 340px;
+        margin: 0 auto;
+    }
+}
+
 .input-section {
     padding: 12px 20px;
     background: white;
