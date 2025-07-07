@@ -45,15 +45,16 @@ body {
 /* Compact Navbar */
 .navbar {
     height: 50px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: #fff;
+    border-bottom: 2px solid var(--gray-200);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08), 0 1.5px 0 rgba(99,102,241,0.04);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 28px;
     position: relative;
     z-index: 100;
+    border-radius: 0 0 12px 12px;
 }
 
 .navbar-brand {
@@ -586,7 +587,7 @@ body {
 }
 
 .typing-indicator {
-    display: none;
+    display: flex;
     align-items: center;
     gap: 10px;
     color: var(--gray-500);

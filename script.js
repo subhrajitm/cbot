@@ -636,12 +636,29 @@ class ModernDRAssistant {
     }
 
     showTyping() {
-        this.typingIndicator.style.display = 'flex';
+        // Remove any existing typing indicator
+        this.hideTyping();
+        // Create a typing-indicator message bubble
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message ai typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="message-avatar">AI</div>
+            <div>
+                Processing...
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        `;
+        this.messagesContainer.appendChild(typingDiv);
         this.scrollToBottom();
     }
 
     hideTyping() {
-        this.typingIndicator.style.display = 'none';
+        const typingDiv = this.messagesContainer.querySelector('.typing-indicator');
+        if (typingDiv) typingDiv.remove();
     }
 
     scrollToBottom() {
@@ -651,8 +668,7 @@ class ModernDRAssistant {
     }
 
     clearMessages() {
-        this.messagesContainer.innerHTML = '<div class="typing-indicator" id="typing-indicator"><div class="message-avatar">AI</div><div>Processing...<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>';
-        this.typingIndicator = document.getElementById('typing-indicator');
+        this.messagesContainer.innerHTML = '';
     }
 
     resetApp() {
