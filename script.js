@@ -606,14 +606,14 @@ class ModernDRAssistant {
         }
         
         // Add speaker button for AI messages
-        if (sender === 'ai' && content) {
-            const speakBtn = document.createElement('button');
-            speakBtn.className = 'speak-btn';
-            speakBtn.title = 'Read aloud';
-            speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            speakBtn.onclick = () => this.speakText(this.stripHtml(content));
-            messageContent.appendChild(speakBtn);
-        }
+        // if (sender === 'ai' && content) {
+        //     const speakBtn = document.createElement('button');
+        //     speakBtn.className = 'speak-btn';
+        //     speakBtn.title = 'Read aloud';
+        //     speakBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        //     speakBtn.onclick = () => this.speakText(this.stripHtml(content));
+        //     messageContent.appendChild(speakBtn);
+        // }
         
         messageDiv.appendChild(avatar);
         messageDiv.appendChild(messageContent);
