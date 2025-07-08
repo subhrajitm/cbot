@@ -7,6 +7,8 @@ class ModernDRAssistant {
         
         this.initializeElements();
         this.bindEvents();
+        // Hide input section on initial load
+        document.querySelector('.input-section').style.display = 'none';
     }
 
     initializeElements() {
@@ -331,6 +333,8 @@ class ModernDRAssistant {
         
         this.clearMessages();
         this.processFlow(processType, 'start');
+        // Show input section in chat
+        document.querySelector('.input-section').style.display = '';
     }
 
     async processFlow(process, step, userInput = null) {
@@ -711,6 +715,8 @@ class ModernDRAssistant {
         this.quickActions.innerHTML = '';
         this.updateCharCounter();
         this.updateSendButton();
+        // Hide input section on homepage
+        document.querySelector('.input-section').style.display = 'none';
     }
 
     toggleVoiceInput() {
