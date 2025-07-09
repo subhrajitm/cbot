@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Management Static Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cms_style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Case Management Form</h1>
+            <p class="page-subtitle">All fields as per requirements</p>
+        </div>
+        <form class="static-case-form">
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Case No</label>
+                    <input type="text" value="abc123" disabled>
+                </div>
+                <div class="form-col">
+                    <label>Date/Time Open</label>
+                    <input type="text" value="7/3/25 10:00 AM" disabled>
+                </div>
+                <div class="form-col">
+                    <label>ESN</label>
+                    <input type="text" value="569123" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Case Type</label>
+                    <select>
+                        <option>Hardware Serviceability</option>
+                        <option>Troubleshooting</option>
+                        <option>Workscope Escalation</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label>Shop</label>
+                    <input type="text" value="Celma" disabled>
+                </div>
+                <div class="form-col">
+                    <label>Customer</label>
+                    <input type="text" value="UAL" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-col">
+                    <label>PL</label>
+                    <input type="text" value="Leap 1A" disabled>
+                </div>
+                <div class="form-col">
+                    <label>ATA</label>
+                    <input type="text" value="72-52-42" disabled>
+                </div>
+                <div class="form-col">
+                    <label>Module</label>
+                    <input type="text" value="HPT S1">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-col">
+                    <label>LLP</label>
+                    <input type="text" value="True/False">
+                </div>
+                <div class="form-col">
+                    <label>On Wing / Off Wing</label>
+                    <select>
+                        <option>On Wing</option>
+                        <option>Off Wing</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label>Part Name</label>
+                    <input type="text" value="FOS">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Location</label>
+                    <input type="text" value="Bore Hub">
+                </div>
+                <div class="form-col">
+                    <label>Damage</label>
+                    <input type="text" value="Fretting">
+                </div>
+                <div class="form-col">
+                    <label>Depth</label>
+                    <input type="text" value="0.001 inch">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Priority</label>
+                    <select>
+                        <option>Work Stoppage</option>
+                        <option>Routine</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label>Record Type</label>
+                    <select>
+                        <option>CDR</option>
+                        <option>SDR</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label>ESM #</label>
+                    <input type="text" value="DMC-LEAP-1A-72-52-42-01A-310A-C_008-00_SX-US" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-col">
+                    <label>Maximum serviceable limit</label>
+                    <input type="text" value="No Serviceable" disabled>
+                </div>
+                <div class="form-col">
+                    <label>Repair method</label>
+                    <input type="text" value="Replace the seal." disabled>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Success!</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <i class="fas fa-check-circle success-icon"></i>
+                <p>Case has been successfully submitted.</p>
+                <p>Case No: <strong>abc123</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/cms_script.js') }}"></script>
+</body>
+</html> 
