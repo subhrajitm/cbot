@@ -44,7 +44,7 @@ body {
 
 /* Compact Navbar */
 .navbar {
-    height: 50px;
+    height: 70px;
     background: #fff;
     border-bottom: 2px solid var(--gray-200);
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08), 0 1.5px 0 rgba(99,102,241,0.04);
@@ -54,52 +54,64 @@ body {
     padding: 0 28px;
     position: relative;
     z-index: 100;
-    border-radius: 0 0 12px 12px;
+    /* border-radius: 0 0 12px 12px; */
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: var(--gray-900);
     text-decoration: none;
 }
 
 .brand-icon {
-    width: 28px;
-    height: 28px;
+    width: 120px;
+    height: 50px;
     border-radius: 6px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 0.8rem;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    box-shadow: none;
 }
 
-.navbar-center {
+.genpact-logo {
+    width: 100%;
+    height: auto;
+    max-height: 50px;
+    object-fit: contain;
+}
+
+.brand-divider {
+    width: 1px;
+    height: 30px;
+    background: var(--gray-300);
+    margin: 0 8px;
+}
+
+.navbar-menu {
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
 .nav-btn {
-    height: 32px;
-    padding: 0 10px;
+    height: 40px;
+    padding: 0 12px;
     border: none;
     background: rgba(255, 255, 255, 0.1);
     color: var(--gray-600);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -120,7 +132,7 @@ body {
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
 }
 
 .search-box {
@@ -166,8 +178,8 @@ body {
 }
 
 .user-avatar {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     display: flex;
@@ -175,7 +187,7 @@ body {
     justify-content: center;
     color: white;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
@@ -193,6 +205,14 @@ body {
     background: var(--gray-50);
     position: relative;
     overflow: hidden;
+    /* Vivid, less whitish background */
+    background-image:
+        linear-gradient(135deg, rgba(0,153,255,0.12) 0%, rgba(255,94,58,0.12) 100%),
+        url('assets/images/4884841.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
 }
 
 .welcome-screen {
@@ -348,6 +368,15 @@ body {
     display: none;
     flex-direction: column;
     overflow: hidden;
+    background-image:
+        linear-gradient(135deg, rgba(0,153,255,0.18) 0%, rgba(255,94,58,0.18) 100%),
+        url('assets/images/4884841.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 .messages {
@@ -672,21 +701,21 @@ body {
 @media (max-width: 768px) {
     .navbar {
         padding: 0 12px;
-        height: 48px;
+        height: 60px;
     }
     
     .search-box {
         width: 120px;
     }
     
-    .navbar-center {
+    .navbar-menu {
         gap: 4px;
     }
     
     .nav-btn {
-        height: 28px;
-        padding: 0 8px;
-        font-size: 0.75rem;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 0.8rem;
     }
     
     .welcome-screen {
