@@ -753,7 +753,7 @@ class ModernDRAssistant {
                 datasets: [{
                     label: 'Cases',
                     data: [52, 20],
-                    backgroundColor: ['#6366f1', '#06b6d4']
+                    backgroundColor: ['#0066cc', '#ff6600']
                 }]
             },
             options: {
@@ -773,7 +773,7 @@ class ModernDRAssistant {
                 datasets: [{
                     label: 'Cases',
                     data: [54, 18],
-                    backgroundColor: ['#8b5cf6', '#f59e0b']
+                    backgroundColor: ['#0099ff', '#ff9900']
                 }]
             },
             options: {
