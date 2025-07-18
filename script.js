@@ -347,7 +347,7 @@ class ModernDRAssistant {
         const flowMap = {
             feasibility: {
                 start: () => {
-                    this.addMessage('I\'ll help you with DR Feasibility Assessment. Let me gather information about your infrastructure.', 'ai');
+                    this.addMessage('I\'ll help you with DR Assistance. Let me gather information about your infrastructure.', 'ai');
                     this.currentStep = 'input';
                     this.setQuickActions(['Infrastructure Details', 'Recovery Requirements', 'Budget Info']);
                     this.addMessage('Please provide details about your current infrastructure:', 'ai');
@@ -360,27 +360,45 @@ class ModernDRAssistant {
                 },
                 analysis: () => {
                     this.addMessage('📊 **Assessment Complete!**\n\n• Feasibility Score: 85%\n• RTO: 4 hours\n• RPO: 1 hour\n• Est. Cost: $50K-75K', 'ai');
-                    this.setQuickActions(['Detailed Report', 'Cost Analysis', 'Next Steps', 'New Assessment']);
+                    this.setQuickActions(['Detailed Report', 'Cost Analysis', 'Next Steps', 'New Assessment', 'Back to Main Menu']);
                 }
             },
             
             assistance: {
                 start: () => {
-                    this.addMessage('DR Assistance - How can I help you?', 'ai');
-                    this.setQuickActions(['SOP Procedures', 'Raise DR Ticket', 'General Help']);
+                    this.addMessage('DR Assistance - How can I help you today?', 'ai');
+                    this.setQuickActions(['DR Assessment', 'Query ESM', 'Query Exception List', 'Historical DR Data', 'Raise DR Ticket']);
                     this.currentStep = 'choice';
                 },
                 choice: (input) => {
-                    if (input.toLowerCase().includes('sop')) {
-                        this.addMessage('📋 **DR Standard Operating Procedures:**\n\n1. Incident Detection\n2. Team Activation\n3. Recovery Process\n4. Validation\n5. Documentation', 'ai');
-                        this.setQuickActions(['Download SOP', 'Training', 'Contact Team']);
-                    } else if (input.toLowerCase().includes('raise')) {
+                    const lowerInput = input.toLowerCase();
+                    
+                    if (lowerInput.includes('assessment') || lowerInput.includes('feasibility')) {
+                        this.currentProcess = 'feasibility';
+                        this.currentStep = 'start';
+                        this.processFlow('feasibility', 'start');
+                    } else if (lowerInput.includes('esm') || lowerInput.includes('query esm')) {
+                        this.currentProcess = 'esm';
+                        this.currentStep = 'start';
+                        this.processFlow('esm', 'start');
+                    } else if (lowerInput.includes('exception') || lowerInput.includes('exception list')) {
+                        this.currentProcess = 'exception';
+                        this.currentStep = 'start';
+                        this.processFlow('exception', 'start');
+                    } else if (lowerInput.includes('historical') || lowerInput.includes('history')) {
+                        this.currentProcess = 'historical';
+                        this.currentStep = 'start';
+                        this.processFlow('historical', 'start');
+                    } else if (lowerInput.includes('raise') || lowerInput.includes('ticket')) {
                         this.currentStep = 'raise_dr';
                         this.addMessage('Creating DR ticket. Please provide the below details \n 1. ESN \n 2. Part Name \n 3.Location \n 4.Damage', 'ai');
                         this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach']);
+                    } else if (lowerInput.includes('sop')) {
+                        this.addMessage('📋 **DR Standard Operating Procedures:**\n\n1. Incident Detection\n2. Team Activation\n3. Recovery Process\n4. Validation\n5. Documentation', 'ai');
+                        this.setQuickActions(['Download SOP', 'Training', 'Contact Team', 'Back to Main Menu']);
                     } else {
                         this.addMessage('I\'m here to help with DR processes. What do you need?', 'ai');
-                        this.setQuickActions(['Recovery Steps', 'Team Contacts', 'Escalation']);
+                        this.setQuickActions(['DR Assessment', 'Query ESM', 'Query Exception List', 'Historical DR Data', 'Raise DR Ticket']);
                     }
                 },
                 raise_dr: (input) => {
@@ -404,12 +422,13 @@ class ModernDRAssistant {
                     this.currentStep = 'choice';
                 },
                 choice: (input) => {
-                    if (input.toLowerCase().includes('view')) {
+                    const lowerInput = input.toLowerCase();
+                    if (lowerInput.includes('view')) {
                         this.addMessage('📋 **Current Exceptions:**\n\n• Total: 23\n• Active: 18\n• Critical: 3\n• Updated: Today', 'ai');
-                        this.setQuickActions(['Filter Results', 'Export Data', 'Details']);
+                        this.setQuickActions(['Filter Results', 'Export Data', 'Details', 'Back to Main Menu']);
                     } else {
                         this.addMessage('Adding new exception. Please provide details:', 'ai');
-                        this.setQuickActions(['System Exception', 'Process Exception', 'Security Exception']);
+                        this.setQuickActions(['System Exception', 'Process Exception', 'Security Exception', 'Back to Main Menu']);
                     }
                 }
             },
@@ -422,7 +441,7 @@ class ModernDRAssistant {
                 },
                 input: (input) => {
                     this.addMessage(`🔍 **Quick Summary of the ESM:**\n\n This Procedure gives instructions to do a visual examination and servicability/repairability of the forward outer seal focusing on the following areas: \n <b>Inducer Holes, Inducer Pad, Impeller Vanes, Seal wire groove, Seal teeth, Rabbets, Bore Hub etc  </b>`, 'ai');
-                    this.setQuickActions(['Detailed View', 'Export', 'Set Alerts']);
+                    this.setQuickActions(['Detailed View', 'Export', 'Set Alerts', 'Back to Main Menu']);
                 }
             },
             
@@ -467,7 +486,100 @@ class ModernDRAssistant {
                     this.messagesContainer.appendChild(messageDiv);
                     this.scrollToBottom();
                     setTimeout(() => this.renderHistoricalCharts(), 0);
-                    this.setQuickActions(['Detailed Report', 'Trends', 'Export']);
+                    this.setQuickActions(['Detailed Report', 'Trends', 'Export', 'Back to Main Menu']);
+                }
+            },
+            
+            raising: {
+                start: () => {
+                    this.addMessage('Raising DR - How can I help you?', 'ai');
+                    this.setQuickActions(['SOP', 'Help In Raising DR']);
+                    this.currentStep = 'choice';
+                },
+                choice: (input) => {
+                    const lowerInput = input.toLowerCase();
+                    
+                    if (lowerInput.includes('sop')) {
+                        this.addMessage('📋 **DR Standard Operating Procedures:**\n\n1. Incident Detection\n2. Team Activation\n3. Recovery Process\n4. Validation\n5. Documentation', 'ai');
+                        this.setQuickActions(['Download SOP', 'Training', 'Contact Team', 'Back to Main Menu']);
+                    } else if (lowerInput.includes('help') || lowerInput.includes('raising')) {
+                        this.currentStep = 'raise_dr';
+                        this.addMessage('Creating DR ticket. Please provide the below details \n 1. ESN \n 2. Part Name \n 3.Location \n 4.Damage', 'ai');
+                        this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach', 'Back to Main Menu']);
+                    } else {
+                        this.addMessage('I\'m here to help with raising DR tickets. What do you need?', 'ai');
+                        this.setQuickActions(['SOP', 'Help In Raising DR', 'Back to Main Menu']);
+                    }
+                },
+                raise_dr: (input) => {
+                    const ticketId = `DR-${Date.now().toString().slice(-6)}`;
+                    this.addMessage(`🎫 **Ticket Created: ${ticketId}**\n\nThe forms has been populated with the details you provided. Please review and submit the form.`, 'ai');
+                    this.addMessageWithButton('View Ticket in CMS', '/cms/index.html');
+                    this.setQuickActions(['Track Status', 'Update Details', 'Contact Team', 'Back to Main Menu']);
+                    
+                    // Add follow-up message after 5 seconds
+                    setTimeout(() => {
+                        this.addMessage('Would you like to create another DR ticket?', 'ai');
+                        this.setQuickActions(['Yes, Create Another', 'No, I\'m Done', 'Track Current Ticket', 'Back to Main Menu']);
+                    }, 5000);
+                }
+            },
+            
+            drlog: {
+                start: () => {
+                    this.addMessage('DR Log - What would you like to view?', 'ai');
+                    this.setQuickActions(['My Queue', 'Overall Queue', 'Specific DR']);
+                    this.currentStep = 'choice';
+                },
+                choice: (input) => {
+                    const lowerInput = input.toLowerCase();
+                    
+                    if (lowerInput.includes('my queue')) {
+                        this.addMessage('📋 **My Queue:**\n\n• Total DRs: 5\n• High Priority: 2\n• Medium Priority: 2\n• Low Priority: 1\n• Average Age: 2.3 days', 'ai');
+                        this.setQuickActions(['View Details', 'Update Status', 'Export', 'Back to Main Menu']);
+                    } else if (lowerInput.includes('overall queue')) {
+                        this.addMessage('📊 **Overall Queue Status:**\n\n• Total Active DRs: 47\n• Open: 32\n• In Progress: 12\n• Pending Review: 3\n• Average Resolution Time: 4.2 days', 'ai');
+                        this.setQuickActions(['Filter by Priority', 'Filter by System', 'Export Report', 'Back to Main Menu']);
+                    } else if (lowerInput.includes('specific dr')) {
+                        this.addMessage('Please provide the DR number or ticket ID:', 'ai');
+                        this.setQuickActions(['DR-2024-001', 'DR-2024-002', 'DR-2024-003', 'Back to Main Menu']);
+                        this.currentStep = 'search';
+                    } else {
+                        this.addMessage('I can help you view DR logs. What would you like to see?', 'ai');
+                        this.setQuickActions(['My Queue', 'Overall Queue', 'Specific DR', 'Back to Main Menu']);
+                    }
+                },
+                search: (input) => {
+                    this.addMessage(`🔍 **DR Details for ${input}:**\n\n• Status: In Progress\n• Priority: High\n• Created: 2024-01-15\n• Assigned To: John Smith\n• Description: System outage affecting production\n• Last Updated: 2024-01-16 14:30`, 'ai');
+                    this.setQuickActions(['Update Status', 'Add Comment', 'View History', 'Back to Main Menu']);
+                }
+            },
+            
+            controltower: {
+                start: () => {
+                    this.addMessage('Control Tower - DR Overview Dashboard', 'ai');
+                    this.setQuickActions(['All DRs Overview', 'Open DRs', 'Closed DRs', 'Delayed DRs']);
+                    this.currentStep = 'choice';
+                },
+                choice: (input) => {
+                    const lowerInput = input.toLowerCase();
+                    
+                    if (lowerInput.includes('all drs') || lowerInput.includes('overview')) {
+                        this.addMessage('📊 **All DRs Overview:**\n\n• Total DRs: 156\n• Open: 47\n• Closed: 109\n• Delayed: 8\n• Average Resolution: 3.8 days\n• SLA Compliance: 94%', 'ai');
+                        this.setQuickActions(['Detailed Report', 'Export Data', 'Filter Options', 'Back to Main Menu']);
+                    } else if (lowerInput.includes('open drs')) {
+                        this.addMessage('🔴 **Open DRs (47 total):**\n\n• High Priority: 12\n• Medium Priority: 23\n• Low Priority: 12\n• Critical: 3\n• Average Age: 2.1 days', 'ai');
+                        this.setQuickActions(['View Details', 'Assign Resources', 'Update Status', 'Back to Main Menu']);
+                    } else if (lowerInput.includes('closed drs')) {
+                        this.addMessage('🟢 **Closed DRs (109 total):**\n\n• This Month: 23\n• Last Month: 31\n• Average Resolution: 3.2 days\n• SLA Met: 98%', 'ai');
+                        this.setQuickActions(['View Report', 'Export Data', 'Trends Analysis', 'Back to Main Menu']);
+                    } else if (lowerInput.includes('delayed drs')) {
+                        this.addMessage('⚠️ **Delayed DRs (8 total):**\n\n• DR-2024-015: Resource constraints (2 days overdue)\n• DR-2024-023: Vendor dependency (1 day overdue)\n• DR-2024-031: Technical complexity (3 days overdue)\n• DR-2024-042: Approval pending (1 day overdue)', 'ai');
+                        this.setQuickActions(['View Details', 'Escalate', 'Update Timeline', 'Back to Main Menu']);
+                    } else {
+                        this.addMessage('I can provide an overview of all DRs. What would you like to see?', 'ai');
+                        this.setQuickActions(['All DRs Overview', 'Open DRs', 'Closed DRs', 'Delayed DRs', 'Back to Main Menu']);
+                    }
                 }
             }
         };
@@ -525,29 +637,29 @@ class ModernDRAssistant {
             this.resetApp();
         } else if (lowerMessage.includes('home')) {
             this.resetApp();
-        } else if (lowerMessage.includes('feasibility') || lowerMessage.includes('assessment')) {
-            this.currentProcess = 'feasibility';
-            this.currentStep = 'start';
-            this.processFlow('feasibility', 'start');
-        } else if (lowerMessage.includes('assistance') || lowerMessage.includes('help') || lowerMessage.includes('sop')) {
+        } else if (lowerMessage.includes('back to main menu') || lowerMessage.includes('main menu')) {
             this.currentProcess = 'assistance';
             this.currentStep = 'start';
             this.processFlow('assistance', 'start');
-        } else if (lowerMessage.includes('exception')) {
-            this.currentProcess = 'exception';
+        } else if (lowerMessage.includes('feasibility') || lowerMessage.includes('assessment') || lowerMessage.includes('esm') || lowerMessage.includes('exception') || lowerMessage.includes('historical') || lowerMessage.includes('history') || lowerMessage.includes('assistance') || lowerMessage.includes('help') || lowerMessage.includes('sop')) {
+            this.currentProcess = 'assistance';
             this.currentStep = 'start';
-            this.processFlow('exception', 'start');
-        } else if (lowerMessage.includes('esm')) {
-            this.currentProcess = 'esm';
+            this.processFlow('assistance', 'start');
+        } else if (lowerMessage.includes('raising') || lowerMessage.includes('raise dr') || lowerMessage.includes('sop')) {
+            this.currentProcess = 'raising';
             this.currentStep = 'start';
-            this.processFlow('esm', 'start');
-        } else if (lowerMessage.includes('historical')) {
-            this.currentProcess = 'historical';
+            this.processFlow('raising', 'start');
+        } else if (lowerMessage.includes('dr log') || lowerMessage.includes('queue') || lowerMessage.includes('my queue') || lowerMessage.includes('overall queue') || lowerMessage.includes('specific dr')) {
+            this.currentProcess = 'drlog';
             this.currentStep = 'start';
-            this.processFlow('historical', 'start');
+            this.processFlow('drlog', 'start');
+        } else if (lowerMessage.includes('control tower') || lowerMessage.includes('overview') || lowerMessage.includes('open drs') || lowerMessage.includes('closed drs') || lowerMessage.includes('delayed drs')) {
+            this.currentProcess = 'controltower';
+            this.currentStep = 'start';
+            this.processFlow('controltower', 'start');
         } else {
-            this.addMessage('I can help you with DR processes. Please choose from:\n\n• DR Feasibility Assessment\n• DR Assistance\n• Exception List Queries\n• ESM Queries\n• Historical DR Data\n\nWhat would you like to know about?', 'ai');
-            this.setQuickActions(['Feasibility Assessment', 'DR Assistance', 'Exception List', 'ESM Query', 'Historical Data']);
+            this.addMessage('I can help you with DR processes. Please choose from:\n\n• DR Assistance\n• Raising DR\n• DR Log\n• Control Tower\n\nWhat would you like to know about?', 'ai');
+            this.setQuickActions(['DR Assistance', 'Raising DR', 'DR Log', 'Control Tower']);
         }
     }
 
