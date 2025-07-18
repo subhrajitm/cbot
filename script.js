@@ -367,7 +367,7 @@ class ModernDRAssistant {
             assistance: {
                 start: () => {
                     this.addMessage('DR Assistance - How can I help you today?', 'ai');
-                    this.setQuickActions(['DR Assessment', 'Query ESM', 'Query Exception List', 'Historical DR Data', 'Raise DR Ticket']);
+                    this.setQuickActions(['DR Assessment', 'Query related to ESM', 'Query on Exception list', 'Query on history DR', 'Help in raising DR']);
                     this.currentStep = 'choice';
                 },
                 choice: (input) => {
@@ -389,16 +389,16 @@ class ModernDRAssistant {
                         this.currentProcess = 'historical';
                         this.currentStep = 'start';
                         this.processFlow('historical', 'start');
-                    } else if (lowerInput.includes('raise') || lowerInput.includes('ticket')) {
+                    } else if (lowerInput.includes('raise') || lowerInput.includes('ticket') || lowerInput.includes('help in raising dr')) {
                         this.currentStep = 'raise_dr';
                         this.addMessage('Creating DR ticket. Please provide the below details \n 1. ESN \n 2. Part Name \n 3.Location \n 4.Damage', 'ai');
-                        this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach']);
+                        this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach', 'Back to Main Menu']);
                     } else if (lowerInput.includes('sop')) {
                         this.addMessage('📋 **DR Standard Operating Procedures:**\n\n1. Incident Detection\n2. Team Activation\n3. Recovery Process\n4. Validation\n5. Documentation', 'ai');
                         this.setQuickActions(['Download SOP', 'Training', 'Contact Team', 'Back to Main Menu']);
                     } else {
                         this.addMessage('I\'m here to help with DR processes. What do you need?', 'ai');
-                        this.setQuickActions(['DR Assessment', 'Query ESM', 'Query Exception List', 'Historical DR Data', 'Raise DR Ticket']);
+                        this.setQuickActions(['DR Assessment', 'Query related to ESM', 'Query on Exception list', 'Query on history DR', 'Help in raising DR']);
                     }
                 },
                 raise_dr: (input) => {
