@@ -333,9 +333,21 @@ class ModernDRAssistant {
     }
 
     handleSecondaryAction(action) {
-        // Set the action as the chat input value and send the message
+        // Set the action as the chat input value
         this.chatInput.value = action;
         this.updateSendButton();
+        
+        // If we're not in assistance process, switch to it first
+        if (this.currentProcess !== 'assistance') {
+            this.currentProcess = 'assistance';
+            this.currentStep = 'choice';
+            // Show the secondary menu if it's not visible
+            if (this.secondaryMenu.style.display !== 'block') {
+                this.secondaryMenu.style.display = 'block';
+            }
+        }
+        
+        // Send the message
         this.sendMessage();
     }
 
