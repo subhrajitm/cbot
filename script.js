@@ -390,29 +390,29 @@ class ModernDRAssistant {
             assistance: {
                 start: () => {
                     this.addMessage('DR Assistance - How can I help you today?', 'ai');
-                    this.setQuickActions(['DR Assessment', 'Query related to ESM', 'Query on Exception list', 'Query on history DR', 'Help in raising DR']);
+                    this.setQuickActions(['What is DR Assessment?', 'How do I check ESM status?', 'What are the current exceptions?', 'Show me recent DR history', 'How do I raise a DR ticket?']);
                     this.currentStep = 'choice';
                 },
                 choice: (input) => {
                     const lowerInput = input.toLowerCase();
                     
-                    if (lowerInput.includes('assessment') || lowerInput.includes('feasibility')) {
+                    if (lowerInput.includes('assessment') || lowerInput.includes('feasibility') || lowerInput.includes('what is dr assessment')) {
                         this.currentProcess = 'feasibility';
                         this.currentStep = 'start';
                         this.processFlow('feasibility', 'start');
-                    } else if (lowerInput.includes('esm') || lowerInput.includes('query esm')) {
+                    } else if (lowerInput.includes('esm') || lowerInput.includes('query esm') || lowerInput.includes('check esm status')) {
                         this.currentProcess = 'esm';
                         this.currentStep = 'start';
                         this.processFlow('esm', 'start');
-                    } else if (lowerInput.includes('exception') || lowerInput.includes('exception list')) {
+                    } else if (lowerInput.includes('exception') || lowerInput.includes('exception list') || lowerInput.includes('current exceptions')) {
                         this.currentProcess = 'exception';
                         this.currentStep = 'start';
                         this.processFlow('exception', 'start');
-                    } else if (lowerInput.includes('historical') || lowerInput.includes('history')) {
+                    } else if (lowerInput.includes('historical') || lowerInput.includes('history') || lowerInput.includes('recent dr history')) {
                         this.currentProcess = 'historical';
                         this.currentStep = 'start';
                         this.processFlow('historical', 'start');
-                    } else if (lowerInput.includes('raise') || lowerInput.includes('ticket') || lowerInput.includes('help in raising dr')) {
+                    } else if (lowerInput.includes('raise') || lowerInput.includes('ticket') || lowerInput.includes('help in raising dr') || lowerInput.includes('raise a dr ticket')) {
                         this.currentStep = 'raise_dr';
                         this.addMessage('Creating DR ticket. Please provide the below details \n 1. ESN \n 2. Part Name \n 3.Location \n 4.Damage', 'ai');
                         this.setQuickActions(['System Outage', 'Data Loss', 'Security Breach', 'Back to Main Menu']);
@@ -421,7 +421,7 @@ class ModernDRAssistant {
                         this.setQuickActions(['Download SOP', 'Training', 'Contact Team', 'Back to Main Menu']);
                     } else {
                         this.addMessage('I\'m here to help with DR processes. What do you need?', 'ai');
-                        this.setQuickActions(['DR Assessment', 'Query related to ESM', 'Query on Exception list', 'Query on history DR', 'Help in raising DR']);
+                        this.setQuickActions(['What is DR Assessment?', 'How do I check ESM status?', 'What are the current exceptions?', 'Show me recent DR history', 'How do I raise a DR ticket?']);
                     }
                 },
                 raise_dr: (input) => {
