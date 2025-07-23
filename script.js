@@ -23,6 +23,7 @@ class ModernDRAssistant {
         this.attachBtn = document.getElementById('attach-btn');
         this.imageBtn = document.getElementById('image-btn');
         this.micBtn = document.getElementById('mic-btn');
+        this.secondaryMenu = document.getElementById('secondary-menu');
         
         // Create hidden file input for attachments
         this.fileInput = document.createElement('input');
@@ -120,6 +121,14 @@ class ModernDRAssistant {
             btn.addEventListener('click', () => {
                 const action = btn.getAttribute('data-action');
                 this.handleNavAction(action, btn);
+            });
+        });
+
+        // Secondary menu actions
+        document.querySelectorAll('.secondary-action-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.getAttribute('data-action');
+                this.handleSecondaryAction(action);
             });
         });
     }
@@ -323,6 +332,13 @@ class ModernDRAssistant {
         // Add other nav actions as needed
     }
 
+    handleSecondaryAction(action) {
+        // Set the action as the chat input value and send the message
+        this.chatInput.value = action;
+        this.updateSendButton();
+        this.sendMessage();
+    }
+
     startProcess(processType) {
         this.currentProcess = processType;
         this.currentStep = 'start';
@@ -330,6 +346,13 @@ class ModernDRAssistant {
         
         this.welcomeScreen.style.display = 'none';
         this.chatArea.style.display = 'flex';
+        
+        // Show/hide secondary menu based on process type
+        if (processType === 'assistance') {
+            this.secondaryMenu.style.display = 'block';
+        } else {
+            this.secondaryMenu.style.display = 'none';
+        }
         
         this.clearMessages();
         this.processFlow(processType, 'start');
@@ -629,6 +652,7 @@ class ModernDRAssistant {
         if (lowerMessage.includes('yes, create new dr') || lowerMessage.includes('create new dr')) {
             this.currentProcess = 'assistance';
             this.currentStep = 'start';
+            this.secondaryMenu.style.display = 'block';
             this.processFlow('assistance', 'start');
         } else if (lowerMessage.includes('no, i\'m done') || lowerMessage.includes('i\'m done')) {
             this.addMessage('Thank you for using the DR Assistant. Have a great day!', 'ai');
@@ -640,10 +664,12 @@ class ModernDRAssistant {
         } else if (lowerMessage.includes('back to main menu') || lowerMessage.includes('main menu')) {
             this.currentProcess = 'assistance';
             this.currentStep = 'start';
+            this.secondaryMenu.style.display = 'block';
             this.processFlow('assistance', 'start');
         } else if (lowerMessage.includes('feasibility') || lowerMessage.includes('assessment') || lowerMessage.includes('esm') || lowerMessage.includes('exception') || lowerMessage.includes('historical') || lowerMessage.includes('history') || lowerMessage.includes('assistance') || lowerMessage.includes('help') || lowerMessage.includes('sop')) {
             this.currentProcess = 'assistance';
             this.currentStep = 'start';
+            this.secondaryMenu.style.display = 'block';
             this.processFlow('assistance', 'start');
         } else if (lowerMessage.includes('raising') || lowerMessage.includes('raise dr') || lowerMessage.includes('sop')) {
             this.currentProcess = 'raising';
@@ -823,6 +849,7 @@ class ModernDRAssistant {
         this.displayAttachments();
         this.chatArea.style.display = 'none';
         this.welcomeScreen.style.display = 'flex';
+        this.secondaryMenu.style.display = 'none';
         this.chatInput.value = '';
         this.quickActions.innerHTML = '';
         this.updateCharCounter();

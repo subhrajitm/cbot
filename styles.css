@@ -58,6 +58,105 @@ body {
     /* border-radius: 0 0 12px 12px; */
 }
 
+/* Secondary Menu for DR Assistance */
+.secondary-menu {
+    display: none;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(255, 102, 0, 0.05) 100%);
+    border-bottom: 1px solid var(--gray-200);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 99;
+    animation: slideInDown 0.3s ease-out;
+}
+
+.secondary-menu-content {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    padding: 8px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.secondary-menu-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--gray-700);
+    white-space: nowrap;
+}
+
+.secondary-menu-title i {
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.secondary-menu-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.secondary-action-btn {
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid var(--gray-300);
+    background: #fff;
+    color: var(--gray-700);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-action-btn:hover {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 102, 204, 0.3);
+}
+
+.secondary-action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+}
+
+.secondary-action-btn i {
+    font-size: 0.7rem;
+}
+
+/* Responsive design for secondary menu */
+@media (max-width: 768px) {
+    .secondary-menu-content {
+        padding: 6px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .secondary-menu-actions {
+        gap: 6px;
+        flex: none;
+        width: 100%;
+    }
+    
+    .secondary-action-btn {
+        height: 26px;
+        padding: 0 10px;
+        font-size: 0.7rem;
+    }
+}
+
 .navbar-brand {
     display: flex;
     align-items: center;
