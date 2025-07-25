@@ -45,17 +45,16 @@ body {
 
 /* Compact Navbar */
 .navbar {
-    height: 60px;
+    height: 48px;
     background: #fff;
-    border-bottom: 2px solid var(--gray-200);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08), 0 1.5px 0 rgba(99,102,241,0.04);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: 0 1px 4px rgba(99, 102, 241, 0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 16px;
     position: relative;
     z-index: 100;
-    /* border-radius: 0 0 12px 12px; */
 }
 
 /* Secondary Menu for DR Assistance */
@@ -70,53 +69,52 @@ body {
 }
 
 .secondary-menu-content {
-    /* max-width: 1200px; */
     margin: 0 auto;
-    padding: 6px 24px;
+    padding: 4px 16px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .secondary-menu-title {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--gray-700);
     white-space: nowrap;
 }
 
 .secondary-menu-title i {
     color: var(--primary);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .secondary-menu-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: wrap;
     justify-content: flex-end;
     flex: 1;
 }
 
 .secondary-action-btn {
-    height: 32px;
-    padding: 0 14px;
+    height: 28px;
+    padding: 0 10px;
     border: 1px solid var(--gray-300);
     background: #fff;
     color: var(--gray-700);
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-width: 130px;
+    gap: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-width: 110px;
     justify-content: center;
 }
 
@@ -124,48 +122,48 @@ body {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
 }
 
 .secondary-action-btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 102, 204, 0.3);
 }
 
 .secondary-action-btn i {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 /* Responsive design for secondary menu */
 @media (max-width: 768px) {
     .secondary-menu-content {
-        padding: 6px 16px;
+        padding: 4px 12px;
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
     }
     
     .secondary-menu-actions {
-        gap: 8px;
+        gap: 6px;
         flex: none;
         width: 100%;
     }
     
     .secondary-action-btn {
-        height: 28px;
-        padding: 0 10px;
-        font-size: 0.75rem;
-        min-width: 110px;
+        height: 26px;
+        padding: 0 8px;
+        font-size: 0.7rem;
+        min-width: 100px;
     }
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -174,9 +172,9 @@ body {
 }
 
 .brand-icon {
-    width: 100px;
-    height: 40px;
-    border-radius: 6px;
+    width: 80px;
+    height: 32px;
+    border-radius: 4px;
     background: transparent;
     display: flex;
     align-items: center;
@@ -187,37 +185,37 @@ body {
 .genpact-logo {
     width: 100%;
     height: auto;
-    max-height: 40px;
+    max-height: 32px;
     object-fit: contain;
 }
 
 .brand-divider {
     width: 1px;
-    height: 25px;
+    height: 20px;
     background: var(--gray-300);
-    margin: 0 6px;
+    margin: 0 4px;
 }
 
 .navbar-menu {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .nav-btn {
-    height: 36px;
-    padding: 0 10px;
+    height: 32px;
+    padding: 0 8px;
     border: none;
     background: rgba(255, 255, 255, 0.1);
     color: var(--gray-600);
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -226,34 +224,34 @@ body {
     background: rgba(255, 255, 255, 0.2);
     color: var(--primary);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn.active {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
 }
 
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .search-box {
     position: relative;
-    width: 160px;
+    width: 140px;
 }
 
 .search-input {
     width: 100%;
-    height: 28px;
-    padding: 0 8px 0 28px;
+    height: 26px;
+    padding: 0 6px 0 24px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    font-size: 0.75rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
     color: var(--gray-900);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -272,11 +270,11 @@ body {
 
 .search-icon {
     position: absolute;
-    left: 8px;
+    left: 6px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--gray-500);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
 }
 
 .user-menu {
@@ -284,8 +282,8 @@ body {
 }
 
 .user-avatar {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     display: flex;
@@ -293,15 +291,15 @@ body {
     justify-content: center;
     color: white;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
 }
 
 .user-avatar:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 3px 8px rgba(99, 102, 241, 0.4);
 }
 
 .main-content {
@@ -322,7 +320,7 @@ body {
 }
 
 .welcome-screen {
-    padding: 20px 24px 0;
+    padding: 16px 16px 0;
     text-align: center;
     flex: 1;
     display: flex;
@@ -334,10 +332,10 @@ body {
 }
 
 .greeting {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--gray-900);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     line-height: 1.1;
     letter-spacing: -0.025em;
 }
@@ -350,10 +348,10 @@ body {
 }
 
 .subtitle {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--gray-900);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     line-height: 1.1;
     letter-spacing: -0.025em;
 }
@@ -367,11 +365,11 @@ body {
 
 .description {
     color: var(--gray-500);
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
     font-weight: 500;
-    max-width: 500px;
+    max-width: 450px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -379,11 +377,11 @@ body {
 /* Single Row Prompt Grid */
 .prompt-grid {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     max-width: 1200px;
-    margin: 0 auto 24px;
+    margin: 0 auto 20px;
     overflow-x: auto;
-    padding: 40px 4px;
+    padding: 30px 4px;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -396,16 +394,16 @@ body {
     flex: 1;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.95));
     border: 1px solid var(--gray-200);
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 14px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.08);
-    min-width: 180px;
+    box-shadow: 0 3px 8px rgba(0, 102, 204, 0.08);
+    min-width: 160px;
     flex-shrink: 0;
 }
 
@@ -424,22 +422,22 @@ body {
 
 .prompt-card:hover {
     border-color: var(--primary);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 102, 204, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 102, 204, 0.15);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 248, 255, 0.95));
 }
 
 .prompt-card .icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(255, 102, 0, 0.1));
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 10px;
+    margin: 0 auto 8px;
     color: var(--primary);
-    font-size: 1rem;
+    font-size: 0.9rem;
     position: relative;
     z-index: 1;
     transition: all 0.3s ease;
@@ -449,21 +447,21 @@ body {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+    box-shadow: 0 3px 8px rgba(0, 102, 204, 0.3);
 }
 
 .prompt-card .title {
     font-weight: 600;
     color: var(--gray-900);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     line-height: 1.3;
     position: relative;
     z-index: 1;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .prompt-card .subtitle {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--gray-500);
     line-height: 1.2;
     font-weight: 400;
@@ -483,14 +481,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: overlay;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-radius: 0;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
 }
 
 .messages {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 16px;
     background: var(--gray-50);
     width: 100%;
     max-width: none;
@@ -498,10 +496,10 @@ body {
 }
 
 .message {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
 }
 
 .message.user {
@@ -509,16 +507,16 @@ body {
 }
 
 .message-avatar {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .message.user .message-avatar {
@@ -533,61 +531,61 @@ body {
 
 .message-content {
     max-width: 75%;
-    padding: 12px 16px;
-    border-radius: 16px;
-    line-height: 1.5;
-    font-size: 0.9rem;
+    padding: 10px 14px;
+    border-radius: 12px;
+    line-height: 1.4;
+    font-size: 0.85rem;
     backdrop-filter: blur(10px);
 }
 
 .message.user .message-content {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.2);
 }
 
 .message.ai .message-content {
     background: white;
     border: 1px solid var(--gray-200);
     color: var(--gray-900);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     position: relative;
-    padding-right: 40px;
+    padding-right: 36px;
 }
 
 .historical-charts {
-    margin-top: 18px;
+    margin-top: 16px;
     background: var(--gray-50);
-    border-radius: 12px;
-    padding: 18px 10px 10px 10px;
-    box-shadow: 0 2px 8px rgba(99,102,241,0.06);
+    border-radius: 10px;
+    padding: 16px 8px 8px 8px;
+    box-shadow: 0 2px 6px rgba(99,102,241,0.06);
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 20px;
     justify-content: center;
     align-items: flex-end;
 }
 .historical-charts canvas {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(99,102,241,0.04);
     margin-bottom: 0;
 }
 @media (max-width: 900px) {
     .historical-charts {
         flex-direction: column;
-        gap: 16px;
-        padding: 12px 2px 2px 2px;
+        gap: 12px;
+        padding: 10px 2px 2px 2px;
     }
     .historical-charts canvas {
         width: 100% !important;
-        max-width: 340px;
+        max-width: 320px;
         margin: 0 auto;
     }
 }
 
 .input-section {
-    padding: 12px 20px;
+    padding: 10px 16px;
     background: white;
     border-top: 1px solid var(--gray-200);
     width: 100%;
@@ -597,8 +595,8 @@ body {
 
 .quick-actions {
     display: flex;
-    gap: 6px;
-    margin-bottom: 8px;
+    gap: 5px;
+    margin-bottom: 6px;
     flex-wrap: wrap;
 }
 
@@ -606,31 +604,31 @@ body {
     background: var(--gray-100);
     border: 1px solid var(--gray-200);
     color: var(--gray-700);
-    padding: 4px 10px;
-    border-radius: 16px;
-    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
 }
 
 .cms-redirect-btn {
-    padding: 10px 20px;
+    padding: 8px 16px;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
-    margin-top: 8px;
+    box-shadow: 0 2px 6px rgba(0, 102, 204, 0.3);
+    margin-top: 6px;
 }
 
 .cms-redirect-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 102, 204, 0.4);
     background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
@@ -638,12 +636,12 @@ body {
     position: relative;
     background: var(--gray-50);
     border: 1px solid var(--gray-200);
-    border-radius: 12px;
-    padding: 8px 12px;
+    border-radius: 10px;
+    padding: 6px 10px;
     transition: all 0.3s ease;
     display: flex;
     align-items: flex-end;
-    gap: 12px;
+    gap: 10px;
 }
 
 .input-container:focus-within {
@@ -656,11 +654,11 @@ body {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background: transparent;
     resize: none;
-    min-height: 18px;
-    max-height: 80px;
+    min-height: 16px;
+    max-height: 70px;
     color: var(--gray-900);
     font-weight: 500;
     line-height: 1.3;
@@ -675,7 +673,7 @@ body {
 
 .input-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
 .input-btn {
@@ -683,12 +681,12 @@ body {
     border: none;
     color: var(--gray-500);
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 6px;
-    border-radius: 6px;
+    gap: 3px;
+    padding: 3px 5px;
+    border-radius: 4px;
     transition: all 0.3s ease;
     font-weight: 500;
 }
@@ -696,33 +694,33 @@ body {
 .send-area {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .web-selector {
     background: none;
     border: none;
     color: var(--gray-500);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 3px;
-    padding: 4px 6px;
-    border-radius: 6px;
+    gap: 2px;
+    padding: 3px 5px;
+    border-radius: 4px;
     transition: all 0.3s ease;
     font-weight: 500;
 }
 
 .char-counter {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--gray-400);
     font-weight: 500;
 }
 
 .send-btn {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border: none;
@@ -732,13 +730,13 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.8rem;
-    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+    font-size: 0.75rem;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
 }
 
 .mic-btn {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--accent), var(--primary));
     border: none;
@@ -748,9 +746,9 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.8rem;
-    margin-right: 4px;
-    box-shadow: 0 2px 6px rgba(6, 182, 212, 0.2);
+    font-size: 0.75rem;
+    margin-right: 3px;
+    box-shadow: 0 2px 4px rgba(6, 182, 212, 0.2);
 }
 .mic-btn.active, .mic-btn:active {
     background: var(--danger);
@@ -760,21 +758,21 @@ body {
 .typing-indicator {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     color: var(--gray-500);
     font-style: italic;
-    margin-bottom: 16px;
-    font-size: 0.85rem;
+    margin-bottom: 12px;
+    font-size: 0.8rem;
 }
 
 .typing-dots {
     display: flex;
-    gap: 3px;
+    gap: 2px;
 }
 
 .typing-dot {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: var(--gray-400);
     animation: typing 1.4s infinite ease-in-out;
@@ -790,17 +788,17 @@ body {
 
 /* Scrollbar styling */
 .messages::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 .messages::-webkit-scrollbar-track {
     background: var(--gray-100);
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 .messages::-webkit-scrollbar-thumb {
     background: var(--gray-300);
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 .messages::-webkit-scrollbar-thumb:hover {
@@ -809,63 +807,63 @@ body {
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 0 12px;
-        height: 50px;
+        padding: 0 10px;
+        height: 44px;
     }
     
     .search-box {
-        width: 100px;
+        width: 90px;
     }
     
     .navbar-menu {
-        gap: 4px;
+        gap: 3px;
     }
     
     .nav-btn {
-        height: 32px;
-        padding: 0 8px;
-        font-size: 0.75rem;
-    }
-    
-    .welcome-screen {
-        padding: 16px 16px 0;
-    }
-    
-    .greeting, .subtitle {
-        font-size: 1.8rem;
-    }
-    
-    .prompt-grid {
-        gap: 8px;
-        padding: 0 16px;
-    }
-    
-    .prompt-card {
-        min-width: 140px;
-        padding: 12px;
-    }
-    
-    .input-section {
-        padding: 10px 12px;
-    }
-    
-    .quick-btn {
-        padding: 3px 8px;
+        height: 28px;
+        padding: 0 6px;
         font-size: 0.7rem;
     }
     
+    .welcome-screen {
+        padding: 12px 12px 0;
+    }
+    
+    .greeting, .subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .prompt-grid {
+        gap: 6px;
+        padding: 0 12px;
+    }
+    
+    .prompt-card {
+        min-width: 120px;
+        padding: 10px;
+    }
+    
+    .input-section {
+        padding: 8px 10px;
+    }
+    
+    .quick-btn {
+        padding: 2px 6px;
+        font-size: 0.65rem;
+    }
+    
     .input-container {
-        padding: 6px 10px;
+        padding: 5px 8px;
     }
     
     .send-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 0.75rem;
+        width: 26px;
+        height: 26px;
+        font-size: 0.7rem;
     }
     
     .messages {
-        padding: 16px;
+        padding: 12px;
     }
 }
 
@@ -910,11 +908,11 @@ body {
 .attachment-display {
     background: var(--gray-50);
     border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    padding: 4px;
-    margin: 4px 0;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 3px 0;
     display: flex;
-    gap: 4px;
+    gap: 3px;
     overflow-x: auto;
     overflow-y: hidden;
     max-width: 100%;
@@ -923,10 +921,10 @@ body {
 .attachment-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 3px 6px;
+    gap: 4px;
+    padding: 2px 4px;
     background: white;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid var(--gray-200);
     position: relative;
     flex-shrink: 0;
@@ -938,23 +936,23 @@ body {
 }
 
 .file-preview-image {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 2px;
     border: 1px solid var(--gray-200);
 }
 
 .file-preview-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: var(--gray-100);
-    border-radius: 3px;
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--gray-600);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 .attachment-info {
@@ -965,7 +963,7 @@ body {
 .attachment-name {
     font-weight: 500;
     color: var(--gray-900);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     margin-bottom: 1px;
     white-space: nowrap;
     overflow: hidden;
@@ -973,7 +971,7 @@ body {
 }
 
 .attachment-size {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--gray-500);
 }
 
@@ -982,11 +980,11 @@ body {
     border: none;
     color: var(--danger);
     cursor: pointer;
-    padding: 2px;
-    border-radius: 2px;
+    padding: 1px;
+    border-radius: 1px;
     transition: all 0.2s ease;
     flex-shrink: 0;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
 }
 
 .remove-attachment:hover {
@@ -996,21 +994,21 @@ body {
 
 /* Message Attachment Styles */
 .message-attachments {
-    margin-top: 8px;
+    margin-top: 6px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .message-attachment {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px;
+    gap: 10px;
+    padding: 10px;
     background: var(--gray-50);
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--gray-200);
-    max-width: 300px;
+    max-width: 280px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -1028,27 +1026,27 @@ body {
 
 .message-attachment:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .attachment-image {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--gray-200);
 }
 
 .attachment-file-icon {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background: var(--gray-100);
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--gray-600);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .attachment-file-info {
@@ -1059,15 +1057,15 @@ body {
 .attachment-file-name {
     font-weight: 500;
     color: var(--gray-900);
-    font-size: 0.9rem;
-    margin-bottom: 4px;
+    font-size: 0.85rem;
+    margin-bottom: 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .attachment-file-size {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--gray-500);
 }
 
@@ -1087,40 +1085,40 @@ body {
 @media (max-width: 768px) {
     .attachment-display {
         margin: 2px 0;
-        padding: 3px;
-        gap: 3px;
+        padding: 2px;
+        gap: 2px;
     }
     
     .attachment-item {
-        padding: 2px 4px;
-        gap: 4px;
+        padding: 1px 3px;
+        gap: 3px;
     }
     
     .file-preview-image,
     .file-preview-icon {
-        width: 20px;
-        height: 20px;
-        font-size: 0.7rem;
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
     }
     
     .attachment-name {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
     
     .attachment-size {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
     }
     
     .message-attachment {
-        max-width: 250px;
-        padding: 8px;
-        gap: 8px;
+        max-width: 220px;
+        padding: 6px;
+        gap: 6px;
     }
     
     .attachment-image,
     .attachment-file-icon {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -1129,20 +1127,20 @@ body {
     border: none;
     color: var(--accent);
     margin-left: auto;
-    margin-right: 4px;
-    width: 28px;
-    height: 28px;
+    margin-right: 3px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    font-size: 1.1em;
+    font-size: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 1px 4px rgba(6,182,212,0.08);
+    box-shadow: 0 1px 3px rgba(6,182,212,0.08);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 6px;
+    right: 6px;
     z-index: 2;
 }
 .message.ai .message-content {
@@ -1151,5 +1149,5 @@ body {
 .speak-btn:hover {
     background: var(--accent);
     color: #fff;
-    box-shadow: 0 2px 8px rgba(6,182,212,0.18);
+    box-shadow: 0 2px 6px rgba(6,182,212,0.18);
 }
