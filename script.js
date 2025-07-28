@@ -356,6 +356,12 @@ class ModernDRAssistant {
         this.currentStep = 'start';
         this.processData = {};
         
+        // Handle DR Log navigation
+        if (processType === 'drlog') {
+            window.location.href = 'drlog.html';
+            return;
+        }
+        
         this.welcomeScreen.style.display = 'none';
         this.chatArea.style.display = 'flex';
         
