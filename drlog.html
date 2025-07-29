@@ -8,113 +8,193 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <style>
-
-        .main-content {
-            overflow: auto;}
-
-        .dr-log-container {
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin: 20px;
+        .main-content{
+            overflow: auto;
+        }
+        .dr-log-container{
             z-index: 2;
+        }
+        .dr-log-container {
+            padding: 16px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-title-section {
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: white;
+            margin: 0 0 6px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin: 0;
+            line-height: 1.4;
         }
 
         .tab-container {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .nav-tabs {
-            border-bottom: 2px solid var(--gray-200);
-            margin-bottom: 20px;
+            border: none;
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 16px;
+            gap: 4px;
         }
 
         .nav-tabs .nav-link {
             border: none;
             color: var(--gray-600);
             font-weight: 500;
-            padding: 12px 20px;
-            border-radius: 0;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
             position: relative;
+            background: transparent;
         }
 
         .nav-tabs .nav-link.active {
-            color: var(--primary);
-            background: none;
-            border-bottom: 3px solid var(--primary);
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .nav-tabs .nav-link:hover {
-            border-color: transparent;
+            background: var(--gray-100);
             color: var(--primary);
+        }
+
+        .nav-tabs .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: #495057 !important;
+}
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
 
         .case-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-
-        .case-table th {
-            background: var(--gray-50);
-            padding: 12px 8px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--gray-700);
-            border-bottom: 2px solid var(--gray-200);
-            font-size: 0.85rem;
-        }
-
-        .case-table td {
-            padding: 12px 8px;
-            border-bottom: 1px solid var(--gray-100);
-            font-size: 0.85rem;
-            vertical-align: middle;
-        }
-
-        .case-table tr:hover {
-            background: var(--gray-50);
-        }
-
-        .case-table tr.highlighted {
-            background: #fff3cd;
-        }
-
-        .priority-badge {
-            padding: 4px 8px;
-            border-radius: 12px;
+            margin: 0;
             font-size: 0.75rem;
             font-weight: 500;
         }
 
+        .case-table th {
+            background: var(--gray-50);
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .case-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: middle;
+            color: #374151;
+            line-height: 1.3;
+        }
+
+        .case-table tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .case-table tbody tr.highlighted {
+            background: rgba(0, 102, 204, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+
+        .case-table tbody tr:nth-child(even) {
+            background: var(--gray-50);
+        }
+
+        .priority-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
         .priority-routine {
-            background: #d4edda;
-            color: #155724;
+            background: var(--success);
+            color: white;
         }
 
         .priority-work-stoppage {
-            background: #f8d7da;
-            color: #721c24;
+            background: var(--danger);
+            color: white;
         }
 
-        .timeline-container {
-            margin-top: 30px;
-            padding: 24px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        .timeline-header-section {
+            margin-top: 24px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f0f4f8 100%);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            backdrop-filter: blur(10px);
-        }
-
-        .timeline-header {
+            border: 2px solid var(--primary);
+            box-shadow: 
+                0 6px 20px rgba(0, 102, 204, 0.15),
+                0 2px 8px rgba(0,0,0,0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 16px 16px 0 0;
         }
 
         .current-case-info {
@@ -124,34 +204,40 @@
         }
 
         .current-case-info .case-details {
-            font-weight: 600;
-            color: var(--gray-800);
-            font-size: 0.95rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+            text-shadow: 0 1px 2px rgba(0, 102, 204, 0.1);
         }
 
         .reminder-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 10px 16px;
+            padding: 10px 18px;
             border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0, 102, 204, 0.3);
+            transition: all 0.2s ease;
         }
 
         .reminder-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
+        }
+
+        .timeline-container {
+            margin-top: 20px;
+            padding: 24px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .timeline-flow {
@@ -159,8 +245,34 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 24px 0;
-            padding: 32px 0;
+            margin: 0;
+            padding: 8px 0;
+            gap: 8px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gray-200);
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 2px;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: width 0.5s ease;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 102, 204, 0.3);
         }
 
         .timeline-stage {
@@ -169,260 +281,355 @@
             align-items: center;
             position: relative;
             flex: 1;
-            z-index: 2;
+            z-index: 3;
+            padding: 0 4px;
+            min-width: 0;
         }
 
-        .stage-box {
-            width: 100px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.75rem;
-            color: white;
-            position: relative;
-            margin-bottom: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(10px);
-        }
-
-        .stage-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        }
-
-        .stage-requester { 
-            background: linear-gradient(135deg, var(--primary), #0052cc);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stage-categorization { 
-            background: linear-gradient(135deg, var(--success), #00a854);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stage-design { 
-            background: linear-gradient(135deg, var(--warning), #fa8c16);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stage-dr { 
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%);
-        }
-        .stage-reviewer { 
-            background: linear-gradient(135deg, var(--warning), #fa8c16);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stage-approver { 
-            background: linear-gradient(135deg, var(--warning), #fa8c16);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stage-customer { 
-            background: linear-gradient(135deg, var(--warning), #fa8c16);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stage-shop { 
-            background: linear-gradient(135deg, var(--dark), #434343);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stage-completed {
-            position: relative;
-        }
-
-        .stage-completed::after {
-            content: '✓';
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--success);
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .stage-date {
             font-size: 0.7rem;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+            text-align: center;
+            padding: 3px 6px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+
+        .timeline-stage.completed .stage-date {
+            color: var(--success);
+            background: rgba(0, 204, 102, 0.1);
+            border-color: var(--success);
+        }
+
+        .timeline-stage.current .stage-date {
+            color: var(--primary);
+            background: rgba(0, 102, 204, 0.1);
+            border-color: var(--primary);
+        }
+
+        .stage-node {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--gray-300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .stage-node i {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            transition: color 0.2s ease;
+        }
+
+        .progress-text {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stage-content {
+            text-align: center;
+            max-width: 100px;
+            padding: 4px 4px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .stage-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 3px;
+            line-height: 1.2;
+        }
+
+
+
+        .timeline-stage.completed .stage-node {
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 3px 8px rgba(0, 204, 102, 0.3);
+        }
+
+        .timeline-stage.completed .stage-node i {
+            color: white;
+        }
+
+        .timeline-stage.completed .stage-title {
+            color: var(--success);
+        }
+
+        .timeline-stage.current .stage-node {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-stage.current .stage-node i,
+        .timeline-stage.current .stage-node .progress-text {
+            color: white;
+        }
+
+        .timeline-stage.current .stage-title {
+            color: var(--primary);
+        }
+
+        .timeline-stage:hover .stage-node {
+            background: var(--gray-100);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .timeline-stage:hover .stage-title {
+            color: var(--primary);
+        }
+
+        .timeline-stage:hover .stage-content {
+            background: rgba(0, 102, 204, 0.05);
+        }
+
+        @keyframes pulse {
+            0% { 
+                box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 6px 16px rgba(0, 102, 204, 0.6);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+                transform: scale(1);
+            }
         }
 
         .timeline-dates {
             display: flex;
             justify-content: space-between;
-            margin-top: 16px;
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            font-weight: 500;
+            margin-top: 20px;
+            padding: 0 40px;
+            position: relative;
         }
 
         .timeline-date {
             text-align: center;
             flex: 1;
-            padding: 4px 8px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .timeline-date.active {
-            background: rgba(0, 102, 204, 0.1);
-            color: var(--primary);
+        .timeline-date::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 2px;
+            height: 10px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--gray-300) 100%);
+            transform: translateX(-50%);
+            border-radius: 1px;
+        }
+
+        .timeline-date span {
+            font-size: 0.75rem;
+            color: var(--gray-800);
             font-weight: 600;
+            padding: 4px 8px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid var(--gray-200);
+            display: inline-block;
         }
 
-        .progress-indicator {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
-            border-radius: 2px;
-            z-index: 1;
-            transform: translateY(-50%);
+        .timeline-date.completed span {
+            background: rgba(0, 204, 102, 0.1);
+            border-color: var(--success);
+            color: var(--success);
         }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-            border-radius: 2px;
-            width: 60%;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+        .timeline-date.current span {
+            background: rgba(0, 102, 204, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
-        .timeline-connector {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, rgba(0, 0, 0, 0.1) 100%);
-            z-index: 1;
-            transform: translateY(-50%);
+
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray-500);
         }
 
-        .stage-indicator {
-            position: absolute;
-            top: 50%;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            transform: translateY(-50%);
-            z-index: 3;
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .stage-indicator.completed {
-            background: var(--success);
-        }
-
-        .stage-indicator.current {
-            background: var(--warning);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.2); }
-            50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.2); }
-            100% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.2); }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
         }
 
         @media (max-width: 768px) {
             .dr-log-container {
-                margin: 10px;
-                padding: 15px;
+                margin: 8px;
+                padding: 12px;
+            }
+
+            .page-header {
+                margin-bottom: 20px;
+                padding: 12px 16px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+                letter-spacing: -0.3px;
+            }
+
+            .page-subtitle {
+                font-size: 0.8rem;
+            }
+
+            .nav-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 4px;
+            }
+
+            .nav-tabs .nav-link {
+                white-space: nowrap;
+                padding: 6px 12px;
+                font-size: 0.8rem;
             }
 
             .case-table {
-                font-size: 0.75rem;
+                font-size: 0.65rem;
             }
 
             .case-table th,
             .case-table td {
-                padding: 8px 4px;
+                padding: 8px 6px;
+            }
+
+            .priority-badge {
+                padding: 4px 8px;
+                font-size: 0.6rem;
+                min-width: 60px;
             }
 
             .timeline-container {
-                padding: 16px;
-                margin-top: 20px;
-            }
-
-            .timeline-header {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-
-            .current-case-info {
-                flex-direction: column;
-                gap: 8px;
-                width: 100%;
-            }
-
-            .reminder-btn {
-                width: 100%;
-                justify-content: center;
+                padding: 20px 16px;
+                margin-top: 12px;
             }
 
             .timeline-flow {
                 flex-direction: column;
-                gap: 20px;
-                padding: 20px 0;
+                gap: 12px;
+                margin: 0;
+                padding: 8px 0;
+            }
+
+            .timeline-line {
+                display: none;
+            }
+
+            .timeline-progress {
+                display: none;
             }
 
             .timeline-stage {
                 flex-direction: row;
-                gap: 12px;
+                gap: 8px;
                 align-items: center;
-                width: 100%;
+                padding: 0;
             }
 
-            .stage-box {
-                width: 120px;
-                height: 40px;
-                font-size: 0.8rem;
+            .stage-date {
+                font-size: 0.65rem;
+                margin-bottom: 0;
+                min-width: 35px;
+                padding: 2px 4px;
+            }
+
+            .stage-node {
+                width: 28px;
+                height: 28px;
                 margin-bottom: 0;
             }
 
-            .stage-indicator {
-                position: static;
-                transform: none;
-                margin-left: 8px;
-            }
-
-            .progress-indicator {
-                display: none;
-            }
-
-            .timeline-dates {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .timeline-date {
-                flex: none;
-                min-width: 60px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stage-box {
-                width: 100px;
-                height: 36px;
+            .stage-node i {
                 font-size: 0.7rem;
             }
 
-            .timeline-stage {
-                gap: 8px;
+            .progress-text {
+                font-size: 0.55rem;
             }
 
-            .case-details {
-                font-size: 0.85rem;
+            .stage-content {
+                flex: 1;
+                text-align: left;
+                max-width: none;
+                padding: 3px 6px;
+            }
+
+            .stage-title {
+                font-size: 0.65rem;
+                margin-bottom: 2px;
+            }
+
+
+
+
+
+            .timeline-dates {
+                padding: 0 16px;
+                margin-top: 16px;
+            }
+
+            .timeline-date::before {
+                display: none;
+            }
+
+            .timeline-date span {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                min-width: 40px;
+            }
+
+
+
+            .timeline-header-section {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+                padding: 16px 20px;
+                margin-top: 16px;
+            }
+
+            .current-case-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .current-case-info .case-details {
+                font-size: 0.9rem;
+            }
+
+            .reminder-btn {
+                align-self: flex-end;
+                padding: 8px 16px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -472,7 +679,12 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="dr-log-container">
-                <h2 class="mb-4">DR Log Dashboard</h2>
+                <div class="page-header">
+                    <div class="page-title-section">
+                        <h1 class="page-title">DR Log</h1>
+                        <p class="page-subtitle">Track and manage your DR cases across all teams</p>
+                    </div>
+                </div>
                 
                 <!-- Tab Container -->
                 <div class="tab-container">
@@ -512,7 +724,8 @@
                     <div class="tab-content" id="drLogTabContent">
                         <!-- Categorization Team Tab -->
                         <div class="tab-pane fade show active" id="categorization" role="tabpanel">
-                            <table class="case-table">
+                            <div class="table-container">
+                                <table class="case-table">
                                 <thead>
                                     <tr>
                                         <th>Case</th>
@@ -569,11 +782,13 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
 
                         <!-- Design Approver Tab -->
                         <div class="tab-pane fade" id="design-approver" role="tabpanel">
-                            <table class="case-table">
+                            <div class="table-container">
+                                <table class="case-table">
                                 <thead>
                                     <tr>
                                         <th>Case</th>
@@ -613,11 +828,13 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
 
                         <!-- Engineer Reviewer Tab -->
                         <div class="tab-pane fade" id="engineer-reviewer" role="tabpanel">
-                            <table class="case-table">
+                            <div class="table-container">
+                                <table class="case-table">
                                 <thead>
                                     <tr>
                                         <th>Case</th>
@@ -657,11 +874,13 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
 
                         <!-- Engineer Approver Tab -->
                         <div class="tab-pane fade" id="engineer-approver" role="tabpanel">
-                            <table class="case-table">
+                            <div class="table-container">
+                                <table class="case-table">
                                 <thead>
                                     <tr>
                                         <th>Case</th>
@@ -701,11 +920,13 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
 
                         <!-- Customer Tab -->
                         <div class="tab-pane fade" id="customer" role="tabpanel">
-                            <table class="case-table">
+                            <div class="table-container">
+                                <table class="case-table">
                                 <thead>
                                     <tr>
                                         <th>Case</th>
@@ -749,7 +970,8 @@
 
                         <!-- Shop Tab -->
                         <div class="tab-pane fade" id="shop" role="tabpanel">
-                            <table class="case-table">
+                            <div class="table-container">
+                                <table class="case-table">
                                 <thead>
                                     <tr>
                                         <th>Case</th>
@@ -789,72 +1011,107 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Timeline Section -->
+                <!-- Timeline Header Section -->
+                <div class="timeline-header-section">
+                    <div class="current-case-info">
+                        <div class="case-details">
+                            Case: Case111, ESN: ESN939, Current State: Design Approver
+                        </div>
+                        <button class="reminder-btn">
+                            <i class="fas fa-envelope"></i>
+                            Send Reminder
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timeline Container Section -->
                 <div class="timeline-container">
-                    <div class="timeline-header">
-                        <div class="current-case-info">
-                            <div class="case-details">
-                                Case: Case111, ESN: ESN939, Current State: Design Approver
-                            </div>
-                            <button class="reminder-btn">
-                                <i class="fas fa-envelope"></i>
-                                Send Reminder
-                            </button>
-                        </div>
-                    </div>
-
                     <div class="timeline-flow">
-                        <div class="progress-indicator">
-                            <div class="progress-bar"></div>
-                        </div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-progress" id="timeline-progress"></div>
                         
-                        <div class="timeline-stage">
-                            <div class="stage-box stage-requester stage-completed">Requester</div>
-                            <div class="stage-indicator completed"></div>
+                        <div class="timeline-stage completed">
+                            <div class="stage-date">7/21</div>
+                            <div class="stage-node">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Requester</div>
+                            </div>
+                        </div>
+                        <div class="timeline-stage completed">
+                            <div class="stage-date">7/22</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Categorization</div>
+                            </div>
+                        </div>
+                        <div class="timeline-stage completed">
+                            <div class="stage-date">7/23</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Design</div>
+                            </div>
+                        </div>
+                        <div class="timeline-stage current">
+                            <div class="stage-date">7/24</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">DR</div>
+                            </div>
                         </div>
                         <div class="timeline-stage">
-                            <div class="stage-box stage-categorization stage-completed">Categorization</div>
-                            <div class="stage-indicator completed"></div>
+                            <div class="stage-date">7/25</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Reviewer</div>
+                            </div>
                         </div>
                         <div class="timeline-stage">
-                            <div class="stage-box stage-design stage-completed">Design</div>
-                            <div class="stage-indicator completed"></div>
+                            <div class="stage-date">7/26</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Approver</div>
+                            </div>
                         </div>
                         <div class="timeline-stage">
-                            <div class="stage-box stage-dr stage-completed">DR</div>
-                            <div class="stage-indicator current"></div>
+                            <div class="stage-date">7/27</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Customer</div>
+                            </div>
                         </div>
                         <div class="timeline-stage">
-                            <div class="stage-box stage-reviewer">Reviewer</div>
-                            <div class="stage-indicator"></div>
-                        </div>
-                        <div class="timeline-stage">
-                            <div class="stage-box stage-approver">Approver</div>
-                            <div class="stage-indicator"></div>
-                        </div>
-                        <div class="timeline-stage">
-                            <div class="stage-box stage-customer">Customer</div>
-                            <div class="stage-indicator"></div>
-                        </div>
-                        <div class="timeline-stage">
-                            <div class="stage-box stage-shop">Shop</div>
-                            <div class="stage-indicator"></div>
+                            <div class="stage-date">7/28</div>
+                            <div class="stage-node">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="stage-content">
+                                <div class="stage-title">Shop</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="timeline-dates">
-                        <div class="timeline-date active">7/21</div>
-                        <div class="timeline-date active">7/22</div>
-                        <div class="timeline-date">7/24</div>
-                        <div class="timeline-date">7/28</div>
-                        <div class="timeline-date">7/31</div>
-                        <div class="timeline-date">8/4</div>
-                        <div class="timeline-date">8/7</div>
-                    </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -864,7 +1121,7 @@
     <script>
         // Initialize Bootstrap tabs
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab functionality
+            // Tab functionality with smooth transitions
             const tabButtons = document.querySelectorAll('[data-bs-toggle="tab"]');
             tabButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
@@ -881,7 +1138,8 @@
                     
                     // Show corresponding content
                     const target = this.getAttribute('data-bs-target');
-                    document.querySelector(target).classList.add('show', 'active');
+                    const targetPane = document.querySelector(target);
+                    targetPane.classList.add('show', 'active');
                 });
             });
 
@@ -896,14 +1154,147 @@
                     // Add highlight to clicked row
                     this.classList.add('highlighted');
                     
-                    // Update timeline info (you can customize this based on the row data)
+                    // Update timeline info
                     const caseId = this.cells[0].textContent;
                     const esn = this.cells[1].textContent;
                     const currentStage = this.cells[8].textContent;
                     
                     document.querySelector('.case-details').textContent = 
                         `Case: ${caseId}, ESN: ${esn}, Current State: ${currentStage}`;
+                    
+                    // Update progress bar based on current stage
+                    updateProgressBar(currentStage);
                 });
+            });
+
+            // Progress bar update function
+            function updateProgressBar(currentStage) {
+                const progressBar = document.getElementById('timeline-progress');
+                const stageMap = {
+                    'Requester': 12.5,
+                    'Categorization': 25,
+                    'Design Engineer': 37.5,
+                    'Design Approver': 50,
+                    'Engineer Reviewer': 62.5,
+                    'Engineer Approver': 75,
+                    'DR Approver': 87.5,
+                    'Customer': 100,
+                    'Shop': 100
+                };
+                
+                const progress = stageMap[currentStage] || 0;
+                progressBar.style.width = progress + '%';
+                
+                // Update timeline stage states
+                updateTimelineStates(currentStage);
+            }
+
+            // Update timeline stage states
+            function updateTimelineStates(currentStage) {
+                const stages = document.querySelectorAll('.timeline-stage');
+                const stageNames = ['Requester', 'Categorization', 'Design', 'DR', 'Reviewer', 'Approver', 'Customer', 'Shop'];
+                
+                stages.forEach((stage, index) => {
+                    const stageName = stageNames[index];
+                    
+                    // Remove all states
+                    stage.classList.remove('completed', 'current');
+                    
+                    // Determine state based on current stage
+                    if (currentStage === stageName) {
+                        stage.classList.add('current');
+                    } else if (stageNames.indexOf(stageName) < stageNames.indexOf(currentStage)) {
+                        stage.classList.add('completed');
+                    }
+                });
+
+                // Update date states
+                updateDateStates(currentStage);
+            }
+
+            // Update date states
+            function updateDateStates(currentStage) {
+                const dates = document.querySelectorAll('.timeline-date');
+                const dateMap = {
+                    'Requester': 0,
+                    'Categorization': 1,
+                    'Design': 2,
+                    'DR': 3,
+                    'Reviewer': 4,
+                    'Approver': 5,
+                    'Customer': 6,
+                    'Shop': 7
+                };
+
+                const currentIndex = dateMap[currentStage] || 0;
+                
+                dates.forEach((date, index) => {
+                    date.classList.remove('completed', 'current');
+                    
+                    if (index < currentIndex) {
+                        date.classList.add('completed');
+                    } else if (index === currentIndex) {
+                        date.classList.add('current');
+                    }
+                });
+            }
+
+            // Timeline stage interactions
+            document.querySelectorAll('.timeline-stage').forEach(stage => {
+                const stageTitle = stage.querySelector('.stage-title');
+                
+                stage.addEventListener('click', function() {
+                    const stageName = stageTitle.textContent;
+                    showStageInfo(stageName);
+                });
+            });
+
+            // Show stage information
+            function showStageInfo(stageName) {
+                const stageInfo = {
+                    'Requester': { description: 'Initial request submission', duration: '1-2 days' },
+                    'Categorization': { description: 'Request classification and routing', duration: '1 day' },
+                    'Design': { description: 'Engineering design and analysis', duration: '3-5 days' },
+                    'DR': { description: 'Design review and approval', duration: '2-3 days' },
+                    'Reviewer': { description: 'Technical review process', duration: '2-3 days' },
+                    'Approver': { description: 'Final approval stage', duration: '1-2 days' },
+                    'Customer': { description: 'Customer review and feedback', duration: '2-4 days' },
+                    'Shop': { description: 'Implementation and execution', duration: '5-10 days' }
+                };
+
+                const info = stageInfo[stageName];
+                if (info) {
+                    alert(`${stageName}\n${info.description}\nDuration: ${info.duration}`);
+                }
+            }
+
+            // Initialize with first case selected
+            const firstRow = document.querySelector('.case-table tbody tr');
+            if (firstRow) {
+                firstRow.classList.add('highlighted');
+                updateProgressBar('DR Approver');
+            }
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const highlightedRow = document.querySelector('.case-table tbody tr.highlighted');
+                if (!highlightedRow) return;
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const nextRow = highlightedRow.nextElementSibling;
+                    if (nextRow) {
+                        nextRow.click();
+                        nextRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prevRow = highlightedRow.previousElementSibling;
+                    if (prevRow) {
+                        prevRow.click();
+                        prevRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
             });
         });
     </script>
