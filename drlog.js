@@ -6,7 +6,8 @@ let filteredData = {
     'design-engineer': [],
     'engineer-reviewer': [],
     'engineer-approver': [],
-    'customer': []
+    'customer': [],
+    'work-stoppage': []
 };
 
 // Pagination functionality
@@ -17,7 +18,8 @@ const paginationState = {
     'design-engineer': { currentPage: 1, totalItems: 0, itemsPerPage: defaultItemsPerPage },
     'engineer-reviewer': { currentPage: 1, totalItems: 0, itemsPerPage: defaultItemsPerPage },
     'engineer-approver': { currentPage: 1, totalItems: 0, itemsPerPage: defaultItemsPerPage },
-    'customer': { currentPage: 1, totalItems: 0, itemsPerPage: defaultItemsPerPage }
+    'customer': { currentPage: 1, totalItems: 0, itemsPerPage: defaultItemsPerPage },
+    'work-stoppage': { currentPage: 1, totalItems: 0, itemsPerPage: defaultItemsPerPage }
 };
 
 // Load data from JSON file
@@ -79,6 +81,7 @@ function filterDataByStage() {
     filteredData['engineer-reviewer'] = casesData.filter(caseItem => caseItem.currentStage === 'Engineer Reviewer');
     filteredData['engineer-approver'] = casesData.filter(caseItem => caseItem.currentStage === 'Engineer Approver');
     filteredData['customer'] = casesData.filter(caseItem => caseItem.currentStage === 'Customer Approval');
+    filteredData['work-stoppage'] = casesData.filter(caseItem => caseItem.priority === 'Work Stoppage');
 }
 
 // Update tab badges with counts
@@ -89,7 +92,8 @@ function updateTabBadges() {
         'design-engineer': filteredData['design-engineer'].length,
         'engineer-reviewer': filteredData['engineer-reviewer'].length,
         'engineer-approver': filteredData['engineer-approver'].length,
-        'customer': filteredData['customer'].length
+        'customer': filteredData['customer'].length,
+        'work-stoppage': filteredData['work-stoppage'].length
     };
     
     Object.keys(tabBadges).forEach(tabId => {

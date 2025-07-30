@@ -74,8 +74,12 @@
 }
 
 .nav-tabs .nav-link:hover {
-    background: var(--gray-100);
-    color: var(--primary);
+    background: linear-gradient(135deg, #0066cc, #ff6600);
+    border-color: #0066cc;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+    transition: all 0.3s ease;
 }
 
 .nav-tabs .badge {

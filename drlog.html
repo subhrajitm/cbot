@@ -94,6 +94,11 @@
                                 Customer Approval <span class="badge bg-primary ms-2">2</span>
                             </button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="work-stoppage-tab" data-bs-toggle="tab" data-bs-target="#work-stoppage" type="button" role="tab">
+                                Work Stoppage <span class="badge bg-primary ms-2">0</span>
+                            </button>
+                        </li>
                     </ul>
                     
                     <div class="tab-content" id="drLogTabContent">
@@ -440,6 +445,63 @@
                                         <button class="page-btn active" data-page="1">1</button>
                                     </div>
                                     <button class="pagination-btn" id="customer-next" disabled>
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Work Stoppage Tab -->
+                        <div class="tab-pane fade" id="work-stoppage" role="tabpanel">
+                            <div class="table-container">
+                                <table class="case-table">
+                                <thead>
+                                    <tr>
+                                        <th>Case</th>
+                                        <th>ESN</th>
+                                        <th>Type</th>
+                                        <th>Priority</th>
+                                        <th>Engine Model</th>
+                                        <th>ATA</th>
+                                        <th>Part Name</th>
+                                        <th>Title</th>
+                                        <th>Current Stage</th>
+                                        <th>Open Date</th>
+                                        <th>Categorization</th>
+                                        <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
+                                        <th>Engineer Approver</th>
+                                        <th>Customer Approval</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="work-stoppage-tbody">
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                            </div>
+                            <!-- Pagination for Work Stoppage Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="work-stoppage-start">0</span> to <span id="work-stoppage-end">0</span> of <span id="work-stoppage-total">0</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="work-stoppage-rows-per-page">Rows per page:</label>
+                                        <select id="work-stoppage-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="work-stoppage-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="work-stoppage-pages">
+                                        <!-- Pages will be generated dynamically -->
+                                    </div>
+                                    <button class="pagination-btn" id="work-stoppage-next" disabled>
                                         Next <i class="fas fa-chevron-right"></i>
                                     </button>
                                 </div>
