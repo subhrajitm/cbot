@@ -346,23 +346,21 @@
     box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
 }
 
+/* Timeline Container */
 .timeline-container {
-    margin-top: 20px;
-    padding: 24px;
     background: white;
-    border-radius: 8px;
-    border: 1px solid var(--gray-200);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 30px 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .timeline-flow {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0;
-    padding: 8px 0;
-    gap: 8px;
+    position: relative;
+    margin: 0 20px;
 }
 
 .timeline-line {
@@ -370,24 +368,21 @@
     top: 50%;
     left: 0;
     right: 0;
-    height: 3px;
-    background: var(--gray-200);
+    height: 2px;
+    background: #e9ecef;
     transform: translateY(-50%);
     z-index: 1;
-    border-radius: 2px;
 }
 
 .timeline-progress {
     position: absolute;
     top: 50%;
     left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    height: 2px;
+    background: linear-gradient(90deg, #0066cc, #ff6600);
     transform: translateY(-50%);
     z-index: 2;
-    transition: width 0.5s ease;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0, 102, 204, 0.3);
+    transition: width 0.3s ease;
 }
 
 .timeline-stage {
@@ -395,85 +390,55 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    flex: 1;
     z-index: 3;
-    padding: 0 4px;
-    min-width: 0;
+    flex: 1;
+    max-width: 120px;
 }
 
 .stage-date {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--gray-700);
+    font-size: 12px;
+    color: #6c757d;
     margin-bottom: 8px;
-    text-align: center;
-    padding: 3px 6px;
-    background: white;
-    border-radius: 6px;
-    border: 1px solid var(--gray-200);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    white-space: nowrap;
-}
-
-.timeline-stage.completed .stage-date {
-    color: var(--success);
-    background: rgba(0, 204, 102, 0.1);
-    border-color: var(--success);
-}
-
-.timeline-stage.current .stage-date {
-    color: var(--primary);
-    background: rgba(0, 102, 204, 0.1);
-    border-color: var(--primary);
+    font-weight: 500;
 }
 
 .stage-node {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: white;
-    border: 2px solid var(--gray-300);
+    border: 2px solid #e9ecef;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: all 0.2s ease;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
 }
 
 .stage-node i {
-    font-size: 0.9rem;
-    color: var(--gray-600);
-    transition: color 0.2s ease;
-}
-
-.progress-text {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--primary);
+    font-size: 14px;
+    color: #6c757d;
+    transition: all 0.3s ease;
 }
 
 .stage-content {
     text-align: center;
     max-width: 100px;
-    padding: 4px 4px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
 }
 
 .stage-title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--gray-800);
-    margin-bottom: 3px;
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 500;
     line-height: 1.2;
+    margin-bottom: 2px;
 }
 
+/* Timeline stage states */
 .timeline-stage.completed .stage-node {
-    background: var(--success);
-    border-color: var(--success);
-    box-shadow: 0 3px 8px rgba(0, 204, 102, 0.3);
+    background: linear-gradient(135deg, #0066cc, #ff6600);
+    border-color: #0066cc;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
 }
 
 .timeline-stage.completed .stage-node i {
@@ -481,51 +446,49 @@
 }
 
 .timeline-stage.completed .stage-title {
-    color: var(--success);
+    color: #0066cc;
+    font-weight: 600;
 }
 
 .timeline-stage.current .stage-node {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: linear-gradient(135deg, #0066cc, #ff6600);
+    border-color: #0066cc;
     box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
     animation: pulse 2s infinite;
 }
 
-.timeline-stage.current .stage-node i,
-.timeline-stage.current .stage-node .progress-text {
+.timeline-stage.current .stage-node i {
     color: white;
 }
 
 .timeline-stage.current .stage-title {
-    color: var(--primary);
+    color: #0066cc;
+    font-weight: 600;
 }
 
-.timeline-stage:hover .stage-node {
-    background: var(--gray-100);
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.timeline-stage.pending .stage-node {
+    background: white;
+    border-color: #e9ecef;
 }
 
-.timeline-stage:hover .stage-title {
-    color: var(--primary);
+.timeline-stage.pending .stage-node i {
+    color: #adb5bd;
 }
 
-.timeline-stage:hover .stage-content {
-    background: rgba(0, 102, 204, 0.05);
+.timeline-stage.pending .stage-title {
+    color: #adb5bd;
 }
 
+/* Pulse animation for current stage */
 @keyframes pulse {
-    0% { 
+    0% {
         box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
-        transform: scale(1);
     }
-    50% { 
-        box-shadow: 0 6px 16px rgba(0, 102, 204, 0.6);
-        transform: scale(1.05);
+    50% {
+        box-shadow: 0 4px 20px rgba(0, 102, 204, 0.6);
     }
-    100% { 
+    100% {
         box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
-        transform: scale(1);
     }
 }
 

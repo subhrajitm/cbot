@@ -318,10 +318,11 @@ function updateTimelineForCase(caseItem) {
 function updateProgressBar(currentStage) {
     const progressBar = document.getElementById('timeline-progress');
     const stageMap = {
-        'Categorization': 20,
-        'Design Engineer': 40,
-        'Engineer Reviewer': 60,
-        'Engineer Approver': 80,
+        'Requester': 16.67,
+        'Categorization': 33.33,
+        'Design Engineer': 50,
+        'Engineer Reviewer': 66.67,
+        'Engineer Approver': 83.33,
         'Customer Approval': 100
     };
     
@@ -334,7 +335,7 @@ function updateProgressBar(currentStage) {
 // Update timeline stage states
 function updateTimelineStates(currentStage) {
     const stages = document.querySelectorAll('.timeline-stage');
-    const stageNames = ['Categorization', 'Design Engineer', 'Engineer Reviewer', 'Engineer Approver', 'Customer Approval'];
+    const stageNames = ['Requester', 'Categorization', 'Design Engineer', 'Engineer Reviewer', 'Engineer Approver', 'Customer Approval'];
     
     stages.forEach((stage, index) => {
         const stageName = stageNames[index];
@@ -363,6 +364,7 @@ function updateTimelineStates(currentStage) {
 // Show stage info on hover
     function showStageInfo(stageName) {
         const stageInfo = {
+        'Requester': { description: 'Initial request submission and validation', duration: '1-2 days' },
             'Categorization': { description: 'Request classification and routing', duration: '1 day' },
         'Design Engineer': { description: 'Engineering design and analysis', duration: '3-5 days' },
         'Engineer Reviewer': { description: 'Technical review process', duration: '2-3 days' },
