@@ -793,6 +793,13 @@ function loadCasesData() {
             title: caseItem["Title"],
             currentStage: caseItem["Current Stage"],
             openDate: caseItem["Open Date"],
+            // Actual dates
+            categorizationActual: caseItem["Categorization"],
+            designEngineerActual: caseItem["Design Engineer"],
+            engineerReviewerActual: caseItem["Engineer Reiviewer"],
+            engineerApproverActual: caseItem["Engineer Approver"],
+            customerApprovalActual: caseItem["Customer Approval"],
+            // Expected dates (TAT)
             categorization: caseItem["Categorization TAT"],
             designEngineer: caseItem["Design Engineer TAT"],
             engineerReviewer: caseItem["Engineer Reiviewer TAT"],
@@ -1087,6 +1094,9 @@ function updateTimelineForCase(caseItem) {
     
     // Update timeline states
     updateTimelineStates(caseItem.currentStage);
+    
+    // Update timeline dates with both actual and expected
+    updateTimelineDates(caseItem);
 }
 
 // Update progress bar based on current stage
@@ -1132,6 +1142,79 @@ function updateTimelineStates(currentStage) {
             // Pending stages
             stage.classList.add('pending');
             stageNode.className = 'fas fa-circle';
+        }
+    });
+}
+
+// Update timeline dates with both actual and expected dates
+function updateTimelineDates(caseItem) {
+    const stages = document.querySelectorAll('.timeline-stage');
+    const stageNames = ['Requester', 'Categorization', 'Design Engineer', 'Engineer Reviewer', 'Engineer Approver', 'Customer Approval'];
+    
+    stages.forEach((stage, index) => {
+        const stageName = stageNames[index];
+        const dateElement = stage.querySelector('.stage-date');
+        
+        if (dateElement) {
+            let actualDate = '';
+            let expectedDate = '';
+            
+            // Get actual and expected dates based on stage
+            switch (stageName) {
+                case 'Requester':
+                    actualDate = caseItem.openDate;
+                    expectedDate = caseItem.openDate; // Same as open date
+                    break;
+                case 'Categorization':
+                    actualDate = caseItem.categorizationActual;
+                    expectedDate = caseItem.categorization;
+                    break;
+                case 'Design Engineer':
+                    actualDate = caseItem.designEngineerActual;
+                    expectedDate = caseItem.designEngineer;
+                    break;
+                case 'Engineer Reviewer':
+                    actualDate = caseItem.engineerReviewerActual;
+                    expectedDate = caseItem.engineerReviewer;
+                    break;
+                case 'Engineer Approver':
+                    actualDate = caseItem.engineerApproverActual;
+                    expectedDate = caseItem.engineerApprover;
+                    break;
+                case 'Customer Approval':
+                    actualDate = caseItem.customerApprovalActual;
+                    expectedDate = caseItem.customerApproval;
+                    break;
+            }
+            
+            // Format dates for display
+            const formatDate = (dateStr) => {
+                if (!dateStr || dateStr === 'null') return '';
+                const date = new Date(dateStr);
+                if (isNaN(date.getTime())) return '';
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric',
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+            };
+            
+            const actualFormatted = formatDate(actualDate);
+            const expectedFormatted = formatDate(expectedDate);
+            
+            // Display both dates if available
+            if (actualFormatted && expectedFormatted) {
+                dateElement.innerHTML = `
+                    <div class="actual-date">${actualFormatted}</div>
+                    <div class="expected-date">${expectedFormatted}</div>
+                `;
+            } else if (actualFormatted) {
+                dateElement.innerHTML = `<div class="actual-date">${actualFormatted}</div>`;
+            } else if (expectedFormatted) {
+                dateElement.innerHTML = `<div class="expected-date">${expectedFormatted}</div>`;
+            } else {
+                dateElement.innerHTML = '';
+            }
         }
     });
 }
