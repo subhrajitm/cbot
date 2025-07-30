@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .test-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        /* Floating Chatbot Icon */
+        .floating-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0066cc, #ff6600);
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3);
+            z-index: 9999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            visibility: visible;
+            opacity: 1;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .floating-chatbot:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .floating-icon {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .chatbot-logo svg {
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+        }
+        
+        .floating-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .floating-chatbot:hover .floating-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-content">
+        <h1>Chatbot Visibility Test</h1>
+        <p>This is a test page to check if the floating chatbot is visible.</p>
+        <p>You should see a red circle with yellow border in the bottom-right corner.</p>
+        <p>If you don't see it, there might be a CSS or JavaScript issue.</p>
+    </div>
+    
+    <!-- Floating Chatbot Icon -->
+    <div class="floating-chatbot" id="floating-chatbot">
+        <div class="floating-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="floating-tooltip">
+            DR Assistant
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded');
+            
+            const floatingChatbot = document.getElementById('floating-chatbot');
+            if (floatingChatbot) {
+                console.log('✅ Test floating chatbot found!');
+                console.log('Styles:', window.getComputedStyle(floatingChatbot));
+                
+                floatingChatbot.addEventListener('click', function() {
+                    console.log('Test chatbot clicked!');
+                });
+            } else {
+                console.error('❌ Test floating chatbot not found!');
+            }
+        });
+    </script>
+</body>
+</html> 

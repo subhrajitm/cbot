@@ -381,6 +381,17 @@ function updateTimelineStates(currentStage) {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, checking for floating chatbot...');
+    
+    // Test if floating chatbot exists
+    const floatingChatbot = document.getElementById('floating-chatbot');
+    if (floatingChatbot) {
+        console.log('✅ Floating chatbot found!');
+        console.log('Floating chatbot styles:', window.getComputedStyle(floatingChatbot));
+    } else {
+        console.error('❌ Floating chatbot not found!');
+    }
+    
     // Load data when page loads
     loadCasesData();
     
@@ -403,4 +414,173 @@ document.addEventListener('DOMContentLoaded', function() {
             showStageInfo(stageTitle);
         });
     });
-}); 
+
+    // Initialize chatbot functionality
+    initializeChatbot();
+});
+
+// Chatbot functionality
+function initializeChatbot() {
+    const chatbotContainer = document.getElementById('chatbot-container');
+    const floatingChatbot = document.getElementById('floating-chatbot');
+    const minimizeBtn = document.getElementById('minimize-btn');
+    const maximizeBtn = document.getElementById('maximize-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatMessages = document.getElementById('chat-messages');
+
+    let isMaximized = false;
+
+    // Ensure floating chatbot is visible by default
+    if (floatingChatbot) {
+        floatingChatbot.style.display = 'flex';
+        console.log('Floating chatbot should be visible now');
+        
+        // Test click functionality
+        floatingChatbot.addEventListener('click', function() {
+            console.log('Floating chatbot clicked!');
+        });
+    } else {
+        console.error('Floating chatbot element not found!');
+    }
+
+    // Show chatbot when floating icon is clicked
+    floatingChatbot.addEventListener('click', function() {
+        chatbotContainer.style.display = 'flex';
+        floatingChatbot.style.display = 'none';
+        chatInput.focus();
+    });
+
+    // Minimize chatbot (return to floating icon)
+    minimizeBtn.addEventListener('click', function() {
+        chatbotContainer.style.display = 'none';
+        floatingChatbot.style.display = 'flex';
+    });
+
+    // Toggle maximize/minimize size
+    function toggleMaximize() {
+        if (isMaximized) {
+            chatbotContainer.classList.remove('maximized');
+            minimizeBtn.style.display = 'block';
+            maximizeBtn.style.display = 'block';
+            isMaximized = false;
+        } else {
+            chatbotContainer.classList.add('maximized');
+            minimizeBtn.style.display = 'none';
+            maximizeBtn.style.display = 'block';
+            isMaximized = true;
+        }
+    }
+
+    // Maximize button click
+    maximizeBtn.addEventListener('click', toggleMaximize);
+
+    // Double click header to toggle maximize
+    document.getElementById('chatbot-header').addEventListener('dblclick', toggleMaximize);
+
+    // Close chatbot (return to floating icon)
+    closeBtn.addEventListener('click', function() {
+        chatbotContainer.style.display = 'none';
+        floatingChatbot.style.display = 'flex';
+    });
+
+    // Send message functionality
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+            addUserMessage(message);
+            chatInput.value = '';
+            sendBtn.disabled = true;
+            
+            // Simulate bot response
+            setTimeout(() => {
+                addBotMessage(getBotResponse(message));
+            }, 1000);
+        }
+    }
+
+    // Send button click
+    sendBtn.addEventListener('click', sendMessage);
+
+    // Enter key to send
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Enable/disable send button based on input
+    chatInput.addEventListener('input', function() {
+        sendBtn.disabled = !this.value.trim();
+    });
+
+    // Add user message to chat
+    function addUserMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message user-message';
+        messageDiv.innerHTML = `
+            <div class="message-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="message-content">
+                <div class="message-text">${text}</div>
+                <div class="message-time">${getCurrentTime()}</div>
+            </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
+    // Add bot message to chat
+    function addBotMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message bot-message';
+        messageDiv.innerHTML = `
+            <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="message-content">
+                <div class="message-text">${text}</div>
+                <div class="message-time">${getCurrentTime()}</div>
+            </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
+    // Scroll to bottom of chat
+    function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Get current time
+    function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Bot response logic
+    function getBotResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+            return "Hello! I'm here to help you with DR-related questions. How can I assist you today?";
+        } else if (lowerMessage.includes('dr') && lowerMessage.includes('assessment')) {
+            return "I can help you with DR assessment. Please provide the case number or ESN for the specific DR you'd like me to assess.";
+        } else if (lowerMessage.includes('esm') || lowerMessage.includes('engine')) {
+            return "For ESM queries, I can help you find information about engine models, specifications, and related data. What specific ESM information do you need?";
+        } else if (lowerMessage.includes('exception') || lowerMessage.includes('list')) {
+            return "I can help you check the exception list. Please provide the part number or case details you'd like me to verify.";
+        } else if (lowerMessage.includes('history') || lowerMessage.includes('previous')) {
+            return "I can help you find historical DR data. Please specify the time period or case criteria you're looking for.";
+        } else if (lowerMessage.includes('help') || lowerMessage.includes('assist')) {
+            return "I'm here to help! You can ask me about:\n• DR assessments and status\n• ESM queries\n• Exception list checks\n• Historical DR data\n• General DR process questions";
+        } else {
+            return "I understand you're asking about: '" + message + "'. Let me help you with that. Could you provide more specific details about what you need assistance with?";
+        }
+    }
+
+    // Initialize send button state
+    sendBtn.disabled = true;
+} 
