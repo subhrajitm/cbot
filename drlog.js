@@ -396,6 +396,10 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Floating chatbot not found!');
     }
     
+    // Show critical alert modal on page load
+    const criticalAlertModal = new bootstrap.Modal(document.getElementById('criticalAlertModal'));
+    criticalAlertModal.show();
+    
     // Load data when page loads
     loadCasesData();
     
