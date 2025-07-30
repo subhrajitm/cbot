@@ -963,6 +963,8 @@
     align-items: center;
     justify-content: center;
     font-size: 14px;
+    visibility: visible;
+    opacity: 1;
 }
 
 .chatbot-btn:hover {

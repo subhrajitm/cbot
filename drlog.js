@@ -430,6 +430,12 @@ function initializeChatbot() {
     const sendBtn = document.getElementById('send-btn');
     const chatMessages = document.getElementById('chat-messages');
 
+    // Debug: Check if maximize button is found
+    console.log('Maximize button found:', !!maximizeBtn);
+    if (maximizeBtn) {
+        console.log('Maximize button styles:', window.getComputedStyle(maximizeBtn));
+    }
+
     let isMaximized = false;
 
     // Ensure floating chatbot is visible by default
@@ -460,16 +466,19 @@ function initializeChatbot() {
 
     // Toggle maximize/minimize size
     function toggleMaximize() {
+        console.log('Toggle maximize called, current state:', isMaximized);
         if (isMaximized) {
             chatbotContainer.classList.remove('maximized');
             minimizeBtn.style.display = 'block';
             maximizeBtn.style.display = 'block';
             isMaximized = false;
+            console.log('Chatbot minimized');
         } else {
             chatbotContainer.classList.add('maximized');
             minimizeBtn.style.display = 'none';
             maximizeBtn.style.display = 'block';
             isMaximized = true;
+            console.log('Chatbot maximized');
         }
     }
 
