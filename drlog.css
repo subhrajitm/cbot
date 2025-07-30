@@ -369,7 +369,7 @@
 
 .timeline-line {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 12px);
     left: 0;
     right: 0;
     height: 2px;
@@ -380,7 +380,7 @@
 
 .timeline-progress {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 12px);
     left: 0;
     height: 2px;
     background: linear-gradient(90deg, #0066cc, #ff6600);
