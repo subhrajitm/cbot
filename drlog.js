@@ -1202,6 +1202,29 @@ function updateTimelineDates(caseItem) {
             const actualFormatted = formatDate(actualDate);
             const expectedFormatted = formatDate(expectedDate);
             
+            // Compare dates and apply highlighting
+            let highlightClass = '';
+            if (actualDate && expectedDate && actualDate !== 'null' && expectedDate !== 'null') {
+                const actualDateObj = new Date(actualDate);
+                const expectedDateObj = new Date(expectedDate);
+                
+                if (!isNaN(actualDateObj.getTime()) && !isNaN(expectedDateObj.getTime())) {
+                    if (actualDateObj > expectedDateObj) {
+                        highlightClass = 'stage-date-overdue';
+                    } else {
+                        highlightClass = 'stage-date-on-time';
+                    }
+                }
+            }
+            
+            // Remove existing highlight classes
+            dateElement.classList.remove('stage-date-overdue', 'stage-date-on-time');
+            
+            // Add highlight class if applicable
+            if (highlightClass) {
+                dateElement.classList.add(highlightClass);
+            }
+            
             // Display both dates if available
             if (actualFormatted && expectedFormatted) {
                 dateElement.innerHTML = `

@@ -410,6 +410,21 @@
     flex-direction: column;
     justify-content: center;
     max-width: 80px;
+    border-radius: 6px;
+    padding: 4px;
+    transition: all 0.3s ease;
+}
+
+.stage-date-overdue {
+    background-color: rgba(220, 53, 69, 0.1);
+    border: 2px solid #dc3545;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.stage-date-on-time {
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 2px solid #28a745;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
 }
 
 .actual-date {
@@ -831,6 +846,20 @@
         flex-direction: row;
         gap: 4px;
         max-width: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .stage-date-overdue {
+        background-color: rgba(220, 53, 69, 0.15);
+        border: 1px solid #dc3545;
+        box-shadow: 0 1px 3px rgba(220, 53, 69, 0.3);
+    }
+    
+    .stage-date-on-time {
+        background-color: rgba(40, 167, 69, 0.15);
+        border: 1px solid #28a745;
+        box-shadow: 0 1px 3px rgba(40, 167, 69, 0.3);
     }
     
     .actual-date {
