@@ -1563,4 +1563,15 @@
     100% {
         transform: scale(1);
     }
+}
+
+/* Custom modal width for critical alert */
+#criticalAlertModal .modal-dialog {
+    max-width: 600px;
+    width: 100%;
+}
+
+#criticalAlertModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 } 
