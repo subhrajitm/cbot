@@ -400,7 +400,7 @@
 }
 
 .stage-date {
-    font-size: 12px;
+    font-size: 14px;
     color: #6c757d;
     margin-bottom: 8px;
     font-weight: 500;
@@ -409,7 +409,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 80px;
+    max-width: 120px;
     border-radius: 6px;
     padding: 4px;
     transition: all 0.3s ease;
@@ -430,7 +430,7 @@
 .actual-date {
     color: #28a745;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 2px;
     line-height: 1.2;
 }
@@ -438,7 +438,7 @@
 .expected-date {
     color: #6c757d;
     font-weight: 400;
-    font-size: 9px;
+    font-size: 10px;
     opacity: 0.8;
     line-height: 1.2;
 }
@@ -464,7 +464,7 @@
 
 .stage-content {
     text-align: center;
-    max-width: 100px;
+    /* max-width: 100px; */
 }
 
 .stage-title {
@@ -838,7 +838,7 @@
     }
 
     .stage-date {
-        font-size: 0.65rem;
+        font-size: 0.75rem;
         margin-bottom: 0;
         min-width: 60px;
         padding: 2px 4px;
@@ -863,13 +863,13 @@
     }
     
     .actual-date {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         margin-bottom: 0;
         color: #28a745;
     }
     
     .expected-date {
-        font-size: 0.55rem;
+        font-size: 0.65rem;
         opacity: 0.7;
     }
 
