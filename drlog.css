@@ -92,72 +92,197 @@
     background-color: #495057 !important;
 }
 
+/* Table container with horizontal scroll */
 .table-container {
-    background: white;
+    overflow-x: auto;
     border-radius: 8px;
-    border: 1px solid var(--gray-200);
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
+/* Table styles with horizontal scroll */
 .case-table {
     width: 100%;
+    min-width: 1200px; /* Ensure minimum width for all columns */
     border-collapse: collapse;
-    margin: 0;
-    font-size: 0.75rem;
-    font-weight: 500;
+    background-color: #fff;
+    font-size: 14px;
+    white-space: nowrap; /* Keep all content in single lines */
 }
 
-.case-table th {
-    background: var(--gray-50);
-    padding: 12px 10px;
-    text-align: left;
+/* Table header styles */
+.case-table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
     font-weight: 600;
-    color: var(--gray-700);
-    border-bottom: 1px solid var(--gray-200);
-    font-size: 0.75rem;
-    text-transform: uppercase;
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+    min-width: 80px; /* Minimum width for each column */
 }
 
-.case-table td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #f3f4f6;
+/* Specific column widths for better layout */
+.case-table th:nth-child(1), /* Case */
+.case-table td:nth-child(1) {
+    min-width: 80px;
+    max-width: 80px;
+}
+
+.case-table th:nth-child(2), /* ESN */
+.case-table td:nth-child(2) {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.case-table th:nth-child(3), /* Type */
+.case-table td:nth-child(3) {
+    min-width: 60px;
+    max-width: 60px;
+}
+
+.case-table th:nth-child(4), /* Priority */
+.case-table td:nth-child(4) {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.case-table th:nth-child(5), /* Engine Model */
+.case-table td:nth-child(5) {
+    min-width: 80px;
+    max-width: 80px;
+}
+
+.case-table th:nth-child(6), /* ATA */
+.case-table td:nth-child(6) {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.case-table th:nth-child(7), /* Part Name */
+.case-table td:nth-child(7) {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.case-table th:nth-child(8), /* Title */
+.case-table td:nth-child(8) {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.case-table th:nth-child(9), /* Current Stage */
+.case-table td:nth-child(9) {
+    min-width: 140px;
+    max-width: 140px;
+}
+
+.case-table th:nth-child(10), /* Open Date */
+.case-table td:nth-child(10) {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.case-table th:nth-child(11), /* Categorization */
+.case-table td:nth-child(11) {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.case-table th:nth-child(12), /* Design Engineer */
+.case-table td:nth-child(12) {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.case-table th:nth-child(13), /* Engineer Reviewer */
+.case-table td:nth-child(13) {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.case-table th:nth-child(14), /* Engineer Approver */
+.case-table td:nth-child(14) {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.case-table th:nth-child(15), /* Customer Approval */
+.case-table td:nth-child(15) {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+/* Table body styles */
+.case-table tbody td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e9ecef;
     vertical-align: middle;
-    color: #374151;
-    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+/* Row hover effect */
 .case-table tbody tr:hover {
-    background: var(--gray-50);
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
+/* Highlighted row */
 .case-table tbody tr.highlighted {
-    background: rgba(0, 102, 204, 0.1);
-    border-left: 3px solid var(--primary);
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
 }
 
-.case-table tbody tr:nth-child(even) {
-    background: var(--gray-50);
-}
-
+/* Priority badge styles */
 .priority-badge {
     padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
     text-transform: uppercase;
-    display: inline-block;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .priority-routine {
-    background: var(--success);
-    color: white;
+    background-color: #e8f5e8;
+    color: #2e7d32;
 }
 
 .priority-work-stoppage {
-    background: var(--danger);
-    color: white;
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Scrollbar styling for better UX */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Firefox scrollbar styling */
+.table-container {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
 }
 
 .timeline-header-section {
@@ -465,6 +590,133 @@
     opacity: 0.5;
 }
 
+/* Pagination Styles */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.pagination-info {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Rows per page styles */
+.rows-per-page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 20px;
+}
+
+.rows-per-page label {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.rows-per-page-select {
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #495057;
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.rows-per-page-select:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.rows-per-page-select:hover {
+    border-color: #adb5bd;
+}
+
+/* Update pagination controls to accommodate rows per page */
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    color: #495057;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Page ellipsis styles */
+.page-ellipsis {
+    padding: 8px 12px;
+    color: #6c757d;
+    font-weight: 500;
+    user-select: none;
+}
+
+/* Update pagination pages to handle ellipsis */
+.pagination-pages {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.page-btn {
+    padding: 8px 12px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    color: #495057;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 40px;
+}
+
+.page-btn:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.page-btn.active {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.page-btn.active:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Mobile responsive pagination */
 @media (max-width: 768px) {
     .dr-log-container {
         margin: 8px;
@@ -496,14 +748,32 @@
         padding: 6px 12px;
         font-size: 0.8rem;
     }
-
-    .case-table {
-        font-size: 0.65rem;
+    
+    .table-container {
+        margin-bottom: 15px;
     }
-
-    .case-table th,
-    .case-table td {
+    
+    .case-table {
+        font-size: 13px;
+        min-width: 1000px; /* Slightly smaller minimum width on mobile */
+    }
+    
+    .case-table thead th,
+    .case-table tbody td {
         padding: 8px 6px;
+    }
+    
+    /* Reduce column widths on mobile */
+    .case-table th:nth-child(7), /* Part Name */
+    .case-table td:nth-child(7) {
+        min-width: 150px;
+        max-width: 150px;
+    }
+    
+    .case-table th:nth-child(8), /* Title */
+    .case-table td:nth-child(8) {
+        min-width: 200px;
+        max-width: 200px;
     }
 
     .priority-badge {
@@ -610,5 +880,32 @@
         align-self: flex-end;
         padding: 8px 16px;
         font-size: 0.8rem;
+    }
+    
+    /* Mobile responsive pagination */
+    .pagination-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .pagination-controls {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .rows-per-page {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .pagination-pages {
+        order: 2;
+    }
+    
+    .pagination-btn {
+        order: 1;
     }
 } 

@@ -65,40 +65,40 @@
                 <div class="tab-container">
                     <ul class="nav nav-tabs" id="drLogTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="categorization-tab" data-bs-toggle="tab" data-bs-target="#categorization" type="button" role="tab">
-                                Categorization Team <span class="badge bg-primary ms-2">4</span>
+                            <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab">
+                                All <span class="badge bg-primary ms-2">28</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="design-approver-tab" data-bs-toggle="tab" data-bs-target="#design-approver" type="button" role="tab">
-                                Design Approver <span class="badge bg-primary ms-2">3</span>
+                            <button class="nav-link" id="categorization-tab" data-bs-toggle="tab" data-bs-target="#categorization" type="button" role="tab">
+                                Categorization <span class="badge bg-primary ms-2">4</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="design-engineer-tab" data-bs-toggle="tab" data-bs-target="#design-engineer" type="button" role="tab">
+                                Design Engineer <span class="badge bg-primary ms-2">7</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="engineer-reviewer-tab" data-bs-toggle="tab" data-bs-target="#engineer-reviewer" type="button" role="tab">
-                                Engineer Reviewer <span class="badge bg-primary ms-2">7</span>
+                                Engineer Reviewer <span class="badge bg-primary ms-2">5</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="engineer-approver-tab" data-bs-toggle="tab" data-bs-target="#engineer-approver" type="button" role="tab">
-                                Engineer Approver <span class="badge bg-primary ms-2">5</span>
+                                Engineer Approver <span class="badge bg-primary ms-2">10</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="customer-tab" data-bs-toggle="tab" data-bs-target="#customer" type="button" role="tab">
-                                Customer <span class="badge bg-primary ms-2">3</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="shop-tab" data-bs-toggle="tab" data-bs-target="#shop" type="button" role="tab">
-                                Shop <span class="badge bg-primary ms-2">2</span>
+                                Customer Approval <span class="badge bg-primary ms-2">2</span>
                             </button>
                         </li>
                     </ul>
                     
                     <div class="tab-content" id="drLogTabContent">
-                        <!-- Categorization Team Tab -->
-                        <div class="tab-pane fade show active" id="categorization" role="tabpanel">
+                        <!-- All Tab -->
+                        <div class="tab-pane fade show active" id="all" role="tabpanel">
                             <div class="table-container">
                                 <table class="case-table">
                                 <thead>
@@ -115,53 +115,52 @@
                                         <th>Open Date</th>
                                         <th>Categorization</th>
                                         <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
                                         <th>Engineer Approver</th>
-                                        <th>Reviewer Approver</th>
-                                        <th>DR Approver</th>
+                                        <th>Customer Approval</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr class="highlighted">
-                                        <td>Case111</td>
-                                        <td>ESN939</td>
-                                        <td>SDR</td>
-                                        <td><span class="priority-badge priority-routine">Routine</span></td>
-                                        <td>EM1</td>
-                                        <td>ST-S2-42</td>
-                                        <td>HPT Rotor Forward Outer Seal (FOS)</td>
-                                        <td>Forward Outer Seal - Fretting on Outer Disk Mate Face</td>
-                                        <td>DR Approver</td>
-                                        <td>7/22/2025</td>
-                                        <td>7/22/2025</td>
-                                        <td>7/21/2025</td>
-                                        <td>7/22/2025</td>
-                                        <td>7/22/2025</td>
-                                        <td>7/22/2025</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Case112</td>
-                                        <td>ESN573</td>
-                                        <td>CDR</td>
-                                        <td><span class="priority-badge priority-work-stoppage">Work Stoppage</span></td>
-                                        <td>EM2</td>
-                                        <td>ST-4T-02</td>
-                                        <td>COMBUSTION CHAMBER INNER LINER</td>
-                                        <td>During incoming condition, it was verified spalling on TBC, out of ESM Limits.</td>
-                                        <td>Design Engineer</td>
-                                        <td>7/21/2025</td>
-                                        <td>7/21/2025</td>
-                                        <td>7/21/2025</td>
-                                        <td>7/22/2025</td>
-                                        <td>7/24/2025</td>
-                                        <td>7/28/2025</td>
-                                    </tr>
+                                <tbody id="all-tbody">
+                                    <!-- Data will be loaded dynamically -->
                                 </tbody>
                             </table>
                             </div>
+                            <!-- Pagination for All Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="all-start">1</span> to <span id="all-end">5</span> of <span id="all-total">28</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="all-rows-per-page">Rows per page:</label>
+                                        <select id="all-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="all-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="all-pages">
+                                        <button class="page-btn active" data-page="1">1</button>
+                                        <button class="page-btn" data-page="2">2</button>
+                                        <button class="page-btn" data-page="3">3</button>
+                                        <button class="page-btn" data-page="4">4</button>
+                                        <button class="page-btn" data-page="5">5</button>
+                                        <button class="page-btn" data-page="6">6</button>
+                                    </div>
+                                    <button class="pagination-btn" id="all-next">
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Design Approver Tab -->
-                        <div class="tab-pane fade" id="design-approver" role="tabpanel">
+                        <!-- Categorization Tab -->
+                        <div class="tab-pane fade" id="categorization" role="tabpanel">
                             <div class="table-container">
                                 <table class="case-table">
                                 <thead>
@@ -178,31 +177,100 @@
                                         <th>Open Date</th>
                                         <th>Categorization</th>
                                         <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
                                         <th>Engineer Approver</th>
-                                        <th>Reviewer Approver</th>
-                                        <th>DR Approver</th>
+                                        <th>Customer Approval</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Case113</td>
-                                        <td>ESN422</td>
-                                        <td>SDR</td>
-                                        <td><span class="priority-badge priority-routine">Routine</span></td>
-                                        <td>EM1</td>
-                                        <td>ST-S2-42</td>
-                                        <td>LPT Rotor Blade</td>
-                                        <td>Blade tip damage during assembly</td>
-                                        <td>Design Approver</td>
-                                        <td>7/18/2025</td>
-                                        <td>7/18/2025</td>
-                                        <td>7/19/2025</td>
-                                        <td>7/20/2025</td>
-                                        <td>7/21/2025</td>
-                                        <td>7/22/2025</td>
-                                    </tr>
+                                <tbody id="categorization-tbody">
+                                    <!-- Data will be loaded dynamically -->
                                 </tbody>
                             </table>
+                            </div>
+                            <!-- Pagination for Categorization Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="categorization-start">1</span> to <span id="categorization-end">4</span> of <span id="categorization-total">4</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="categorization-rows-per-page">Rows per page:</label>
+                                        <select id="categorization-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="categorization-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="categorization-pages">
+                                        <button class="page-btn active" data-page="1">1</button>
+                                    </div>
+                                    <button class="pagination-btn" id="categorization-next" disabled>
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Design Engineer Tab -->
+                        <div class="tab-pane fade" id="design-engineer" role="tabpanel">
+                            <div class="table-container">
+                                <table class="case-table">
+                                <thead>
+                                    <tr>
+                                        <th>Case</th>
+                                        <th>ESN</th>
+                                        <th>Type</th>
+                                        <th>Priority</th>
+                                        <th>Engine Model</th>
+                                        <th>ATA</th>
+                                        <th>Part Name</th>
+                                        <th>Title</th>
+                                        <th>Current Stage</th>
+                                        <th>Open Date</th>
+                                        <th>Categorization</th>
+                                        <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
+                                        <th>Engineer Approver</th>
+                                        <th>Customer Approval</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="design-engineer-tbody">
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                            </div>
+                            <!-- Pagination for Design Engineer Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="design-engineer-start">1</span> to <span id="design-engineer-end">5</span> of <span id="design-engineer-total">7</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="design-engineer-rows-per-page">Rows per page:</label>
+                                        <select id="design-engineer-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="design-engineer-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="design-engineer-pages">
+                                        <button class="page-btn active" data-page="1">1</button>
+                                        <button class="page-btn" data-page="2">2</button>
+                                    </div>
+                                    <button class="pagination-btn" id="design-engineer-next">
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -224,31 +292,42 @@
                                         <th>Open Date</th>
                                         <th>Categorization</th>
                                         <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
                                         <th>Engineer Approver</th>
-                                        <th>Reviewer Approver</th>
-                                        <th>DR Approver</th>
+                                        <th>Customer Approval</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Case114</td>
-                                        <td>ESN674</td>
-                                        <td>CDR</td>
-                                        <td><span class="priority-badge priority-routine">Routine</span></td>
-                                        <td>EM2</td>
-                                        <td>ST-4T-02</td>
-                                        <td>HPC Stator Vane</td>
-                                        <td>Vane platform wear assessment</td>
-                                        <td>Engineer Reviewer</td>
-                                        <td>7/14/2025</td>
-                                        <td>7/14/2025</td>
-                                        <td>7/15/2025</td>
-                                        <td>7/16/2025</td>
-                                        <td>7/17/2025</td>
-                                        <td>7/18/2025</td>
-                                    </tr>
+                                <tbody id="engineer-reviewer-tbody">
+                                    <!-- Data will be loaded dynamically -->
                                 </tbody>
                             </table>
+                            </div>
+                            <!-- Pagination for Engineer Reviewer Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="engineer-reviewer-start">1</span> to <span id="engineer-reviewer-end">5</span> of <span id="engineer-reviewer-total">5</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="engineer-reviewer-rows-per-page">Rows per page:</label>
+                                        <select id="engineer-reviewer-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="engineer-reviewer-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="engineer-reviewer-pages">
+                                        <button class="page-btn active" data-page="1">1</button>
+                                    </div>
+                                    <button class="pagination-btn" id="engineer-reviewer-next" disabled>
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -270,35 +349,47 @@
                                         <th>Open Date</th>
                                         <th>Categorization</th>
                                         <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
                                         <th>Engineer Approver</th>
-                                        <th>Reviewer Approver</th>
-                                        <th>DR Approver</th>
+                                        <th>Customer Approval</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Case115</td>
-                                        <td>ESN497</td>
-                                        <td>SDR</td>
-                                        <td><span class="priority-badge priority-work-stoppage">Work Stoppage</span></td>
-                                        <td>EM1</td>
-                                        <td>ST-S2-42</td>
-                                        <td>Fan Blade</td>
-                                        <td>Blade root crack investigation</td>
-                                        <td>Engineer Approver</td>
-                                        <td>7/23/2025</td>
-                                        <td>7/23/2025</td>
-                                        <td>7/24/2025</td>
-                                        <td>7/25/2025</td>
-                                        <td>7/26/2025</td>
-                                        <td>7/27/2025</td>
-                                    </tr>
+                                <tbody id="engineer-approver-tbody">
+                                    <!-- Data will be loaded dynamically -->
                                 </tbody>
                             </table>
                             </div>
+                            <!-- Pagination for Engineer Approver Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="engineer-approver-start">1</span> to <span id="engineer-approver-end">5</span> of <span id="engineer-approver-total">10</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="engineer-approver-rows-per-page">Rows per page:</label>
+                                        <select id="engineer-approver-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="engineer-approver-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="engineer-approver-pages">
+                                        <button class="page-btn active" data-page="1">1</button>
+                                        <button class="page-btn" data-page="2">2</button>
+                                    </div>
+                                    <button class="pagination-btn" id="engineer-approver-next">
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Customer Tab -->
+                        <!-- Customer Approval Tab -->
                         <div class="tab-pane fade" id="customer" role="tabpanel">
                             <div class="table-container">
                                 <table class="case-table">
@@ -316,76 +407,42 @@
                                         <th>Open Date</th>
                                         <th>Categorization</th>
                                         <th>Design Engineer</th>
+                                        <th>Engineer Reviewer</th>
                                         <th>Engineer Approver</th>
-                                        <th>Reviewer Approver</th>
-                                        <th>DR Approver</th>
+                                        <th>Customer Approval</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Case116</td>
-                                        <td>ESN823</td>
-                                        <td>CDR</td>
-                                        <td><span class="priority-badge priority-routine">Routine</span></td>
-                                        <td>EM2</td>
-                                        <td>ST-4T-02</td>
-                                        <td>Combustor Liner</td>
-                                        <td>Liner thermal barrier coating assessment</td>
-                                        <td>Customer</td>
-                                        <td>7/20/2025</td>
-                                        <td>7/20/2025</td>
-                                        <td>7/21/2025</td>
-                                        <td>7/22/2025</td>
-                                        <td>7/23/2025</td>
-                                        <td>7/24/2025</td>
-                                    </tr>
+                                <tbody id="customer-tbody">
+                                    <!-- Data will be loaded dynamically -->
                                 </tbody>
                             </table>
-                        </div>
-
-                        <!-- Shop Tab -->
-                        <div class="tab-pane fade" id="shop" role="tabpanel">
-                            <div class="table-container">
-                                <table class="case-table">
-                                <thead>
-                                    <tr>
-                                        <th>Case</th>
-                                        <th>ESN</th>
-                                        <th>Type</th>
-                                        <th>Priority</th>
-                                        <th>Engine Model</th>
-                                        <th>ATA</th>
-                                        <th>Part Name</th>
-                                        <th>Title</th>
-                                        <th>Current Stage</th>
-                                        <th>Open Date</th>
-                                        <th>Categorization</th>
-                                        <th>Design Engineer</th>
-                                        <th>Engineer Approver</th>
-                                        <th>Reviewer Approver</th>
-                                        <th>DR Approver</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Case117</td>
-                                        <td>ESN156</td>
-                                        <td>SDR</td>
-                                        <td><span class="priority-badge priority-routine">Routine</span></td>
-                                        <td>EM1</td>
-                                        <td>ST-S2-42</td>
-                                        <td>Bearing Housing</td>
-                                        <td>Housing wear pattern analysis</td>
-                                        <td>Shop</td>
-                                        <td>7/17/2025</td>
-                                        <td>7/17/2025</td>
-                                        <td>7/18/2025</td>
-                                        <td>7/19/2025</td>
-                                        <td>7/20/2025</td>
-                                        <td>7/21/2025</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            </div>
+                            <!-- Pagination for Customer Tab -->
+                            <div class="pagination-container">
+                                <div class="pagination-info">
+                                    Showing <span id="customer-start">1</span> to <span id="customer-end">2</span> of <span id="customer-total">2</span> entries
+                                </div>
+                                <div class="pagination-controls">
+                                    <div class="rows-per-page">
+                                        <label for="customer-rows-per-page">Rows per page:</label>
+                                        <select id="customer-rows-per-page" class="rows-per-page-select">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <button class="pagination-btn" id="customer-prev" disabled>
+                                        <i class="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <div class="pagination-pages" id="customer-pages">
+                                        <button class="page-btn active" data-page="1">1</button>
+                                    </div>
+                                    <button class="pagination-btn" id="customer-next" disabled>
+                                        Next <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -416,7 +473,7 @@
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <div class="stage-content">
-                                <div class="stage-title">Requester</div>
+                                <div class="stage-title">Categorization</div>
                             </div>
                         </div>
                         <div class="timeline-stage completed">
@@ -425,25 +482,25 @@
                                 <i class="fas fa-check"></i>
                             </div>
                             <div class="stage-content">
-                                <div class="stage-title">Categorization</div>
+                                <div class="stage-title">Design Engineer</div>
                             </div>
                         </div>
-                        <div class="timeline-stage completed">
+                        <div class="timeline-stage current">
                             <div class="stage-date">7/23</div>
                             <div class="stage-node">
                                 <i class="fas fa-check"></i>
                             </div>
                             <div class="stage-content">
-                                <div class="stage-title">Design</div>
+                                <div class="stage-title">Engineer Reviewer</div>
                             </div>
                         </div>
-                        <div class="timeline-stage current">
+                        <div class="timeline-stage">
                             <div class="stage-date">7/24</div>
                             <div class="stage-node">
                                 <i class="fas fa-check"></i>
                             </div>
                             <div class="stage-content">
-                                <div class="stage-title">DR</div>
+                                <div class="stage-title">Engineer Approver</div>
                             </div>
                         </div>
                         <div class="timeline-stage">
@@ -452,34 +509,7 @@
                                 <i class="fas fa-check"></i>
                             </div>
                             <div class="stage-content">
-                                <div class="stage-title">Reviewer</div>
-                            </div>
-                        </div>
-                        <div class="timeline-stage">
-                            <div class="stage-date">7/26</div>
-                            <div class="stage-node">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="stage-content">
-                                <div class="stage-title">Approver</div>
-                            </div>
-                        </div>
-                        <div class="timeline-stage">
-                            <div class="stage-date">7/27</div>
-                            <div class="stage-node">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="stage-content">
-                                <div class="stage-title">Customer</div>
-                            </div>
-                        </div>
-                        <div class="timeline-stage">
-                            <div class="stage-date">7/28</div>
-                            <div class="stage-node">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="stage-content">
-                                <div class="stage-title">Shop</div>
+                                <div class="stage-title">Customer Approval</div>
                             </div>
                         </div>
                     </div>
