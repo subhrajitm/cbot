@@ -106,7 +106,7 @@ function createTableRow(caseItem) {
     
     // Add click event to highlight row and update timeline
     row.addEventListener('click', () => {
-        // Remove highlight from all rows
+            // Remove highlight from all rows
         document.querySelectorAll('.case-table tbody tr').forEach(r => r.classList.remove('highlighted'));
         // Add highlight to clicked row
         row.classList.add('highlighted');
@@ -361,17 +361,17 @@ function updateTimelineStates(currentStage) {
 }
 
 // Show stage info on hover
-function showStageInfo(stageName) {
-    const stageInfo = {
-        'Categorization': { description: 'Request classification and routing', duration: '1 day' },
+    function showStageInfo(stageName) {
+        const stageInfo = {
+            'Categorization': { description: 'Request classification and routing', duration: '1 day' },
         'Design Engineer': { description: 'Engineering design and analysis', duration: '3-5 days' },
         'Engineer Reviewer': { description: 'Technical review process', duration: '2-3 days' },
         'Engineer Approver': { description: 'Final approval stage', duration: '1-2 days' },
         'Customer Approval': { description: 'Customer review and feedback', duration: '2-4 days' }
-    };
-    
-    const info = stageInfo[stageName];
-    if (info) {
+        };
+
+        const info = stageInfo[stageName];
+        if (info) {
         // You can implement tooltip or modal to show this info
         console.log(`${stageName}: ${info.description} (${info.duration})`);
     }
