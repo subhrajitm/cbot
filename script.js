@@ -374,8 +374,13 @@ class ModernDRAssistant {
         
         this.clearMessages();
         this.processFlow(processType, 'start');
-        // Show input section in chat
-        document.querySelector('.input-section').style.display = '';
+        
+        // Show/hide input section based on process type
+        if (processType === 'controltower') {
+            document.querySelector('.input-section').style.display = 'none';
+        } else {
+            document.querySelector('.input-section').style.display = '';
+        }
     }
 
     async processFlow(process, step, userInput = null) {
